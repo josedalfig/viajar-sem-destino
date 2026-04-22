@@ -319,6 +319,16 @@ select option{background:#1a120b;color:var(--sand)}
 .btn-fallback{padding:10px 20px;border:1px solid rgba(201,98,47,.35);border-radius:10px;background:rgba(201,98,47,.08);color:var(--accl);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;transition:all .18s}
 .btn-fallback:hover{background:rgba(201,98,47,.16);border-color:rgba(201,98,47,.6)}
 @media(max-width:600px){.fallback-cards{grid-template-columns:1fr 1fr}.fb-card{padding:12px 13px}}
+/* ── Weather ── */
+.wx-bar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.wx-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.wx-icon{font-size:1.8rem;line-height:1;flex-shrink:0}
+.wx-info{}
+.wx-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}
+.wx-temp{font-size:1.1rem;font-weight:600;color:var(--sand)}
+.wx-desc{font-size:.72rem;color:var(--mut);margin-top:2px;text-transform:capitalize}
+.wx-loading{opacity:.5;font-size:.78rem;color:var(--mut);display:flex;align-items:center;gap:6px}
+.wx-err{font-size:.72rem;color:rgba(138,127,118,.5)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 
@@ -643,6 +653,30 @@ const DESTS={
     {city:'Bogotá',country:'🇨🇴 Colômbia',iata:'BOG',price:1650,tags:['Cultura','Aventura'],clima:['temperado'],tipo:['cultura','aventura','gastronomia'],airlines:['Avianca','Latam'],desc:'Capital vibrante a 2.600m de altitude com bairros coloridos e café excepcional.',rating:4.5,times:['06:50→10:00','16:20→19:30'],img:'https://images.unsplash.com/photo-1584345604476-8ec5f452d1f2?w=800&q=70'},
     {city:'Cidade do Panamá',country:'🇵🇦 Panamá',iata:'PTY',price:1980,tags:['Cultura','Hub'],clima:['calor'],tipo:['cultura'],airlines:['Copa Airlines','Latam'],desc:'Canal histórico, skyline surpreendente e hub para toda a América Central.',rating:4.4,times:['07:30→11:00','18:45→22:15'],img:'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&q=70'},
   ]
+};
+
+const OWM_KEY = '46b220f5f590d886bea491bb64bae4b5';
+
+// City coordinates for weather lookup (lat, lon)
+const CITY_COORDS = {
+  'Florianópolis': [-27.5954, -48.5480],
+  'Rio de Janeiro': [-22.9068, -43.1729],
+  'São Paulo':      [-23.5505, -46.6333],
+  'Fortaleza':      [-3.7172,  -38.5433],
+  'Foz do Iguaçu':  [-25.5478, -54.5882],
+  'Salvador':       [-12.9714, -38.5014],
+  'Recife':         [-8.0476,  -34.8770],
+  'Manaus':         [-3.1190,  -60.0217],
+  'Buenos Aires':   [-34.6037, -58.3816],
+  'Santiago':       [-33.4489, -70.6693],
+  'Montevidéu':     [-34.9011, -56.1645],
+  'Cancún':         [21.1619,  -86.8515],
+  'Miami':          [25.7617,  -80.1918],
+  'Lisboa':         [38.7169,   -9.1399],
+  'Roma':           [41.9028,   12.4964],
+  'Barcelona':      [41.3851,    2.1734],
+  'Bogotá':         [4.7110,   -74.0721],
+  'Cidade do Panamá':[8.9936,  -79.5197],
 };
 
 const COORDS={'Florianópolis':[-27.5954,-48.5480],'Rio de Janeiro':[-22.9068,-43.1729],'São Paulo':[-23.5505,-46.6333],'Fortaleza':[-3.7172,-38.5433],'Foz do Iguaçu':[-25.5478,-54.5882],'Salvador':[-12.9714,-38.5014],'Recife':[-8.0476,-34.8770],'Manaus':[-3.1190,-60.0217],'Buenos Aires':[-34.6037,-58.3816],'Santiago':[-33.4489,-70.6693],'Montevidéu':[-34.9011,-56.1645],'Cancún':[21.1619,-86.8515],'Miami':[25.7617,-80.1918],'Lisboa':[38.7169,-9.1399],'Roma':[41.9028,12.4964],'Barcelona':[41.3851,2.1734],'Bogotá':[4.7110,-74.0721],'Cidade do Panamá':[8.9936,-79.5197]};
@@ -1092,6 +1126,80 @@ function renderCards(){
   }).join('');
 }
 // ── Detail ──
+// ── Weather fetch ──
+async function fetchWeather(city) {
+  const coords = CITY_COORDS[city];
+  if (!coords) return null;
+  try {
+    // Current weather
+    const cur = await fetch(
+      'https://api.openweathermap.org/data/2.5/weather?lat='+coords[0]+'&lon='+coords[1]+'&appid='+OWM_KEY+'&units=metric&lang=pt_br'
+    ).then(r => r.json());
+
+    // 5-day forecast — get the entry closest to travel date
+    const fcast = await fetch(
+      'https://api.openweathermap.org/data/2.5/forecast?lat='+coords[0]+'&lon='+coords[1]+'&appid='+OWM_KEY+'&units=metric&lang=pt_br&cnt=8'
+    ).then(r => r.json());
+
+    const wxIcon = function(code) {
+      if (code >= 200 && code < 300) return '⛈️';
+      if (code >= 300 && code < 400) return '🌦️';
+      if (code >= 500 && code < 600) return '🌧️';
+      if (code >= 600 && code < 700) return '❄️';
+      if (code >= 700 && code < 800) return '🌫️';
+      if (code === 800) return '☀️';
+      if (code === 801 || code === 802) return '⛅';
+      return '🌥️';
+    };
+
+    const curCode = cur.weather[0].id;
+    const fEntry  = fcast.list && fcast.list[4] ? fcast.list[4] : null;
+    const fCode   = fEntry ? fEntry.weather[0].id : curCode;
+
+    return {
+      current: {
+        temp: Math.round(cur.main.temp),
+        feels: Math.round(cur.main.feels_like),
+        desc: cur.weather[0].description,
+        icon: wxIcon(curCode),
+        humidity: cur.main.humidity,
+      },
+      forecast: fEntry ? {
+        temp: Math.round(fEntry.main.temp),
+        desc: fEntry.weather[0].description,
+        icon: wxIcon(fCode),
+      } : null,
+    };
+  } catch(e) {
+    return null;
+  }
+}
+
+function buildWeatherHTML(wx, travelDate) {
+  if (!wx) return '<div class="wx-err">Clima indisponível no momento</div>';
+  const dateLabel = travelDate
+    ? 'Previsão · ' + travelDate.toLocaleDateString('pt-BR', {day:'2-digit', month:'short'})
+    : 'Próximos dias';
+  return '<div class="wx-bar">'
+    + '<div class="wx-card">'
+      + '<div class="wx-icon">' + wx.current.icon + '</div>'
+      + '<div class="wx-info">'
+        + '<div class="wx-label">Agora em ' + '</div>'
+        + '<div class="wx-temp">' + wx.current.temp + '°C</div>'
+        + '<div class="wx-desc">' + wx.current.desc + ' · ' + wx.current.humidity + '% umidade</div>'
+      + '</div>'
+    + '</div>'
+    + (wx.forecast ? '<div class="wx-card">'
+      + '<div class="wx-icon">' + wx.forecast.icon + '</div>'
+      + '<div class="wx-info">'
+        + '<div class="wx-label">' + dateLabel + '</div>'
+        + '<div class="wx-temp">' + wx.forecast.temp + '°C</div>'
+        + '<div class="wx-desc">' + wx.forecast.desc + '</div>'
+      + '</div>'
+    + '</div>' : '')
+  + '</div>';
+}
+
 function showDetail(idx){
   const d = results[idx];
   const pessoas = parseInt(document.getElementById('pessoas').value)||1;
@@ -1135,7 +1243,9 @@ function showDetail(idx){
       + '<div class="dst"><div class="dsl">Volta</div><div class="dsv">' + (soIda ? 'Só ida' : fmtD(calVoltaDate)) + '</div></div>'
       + '<div class="dst"><div class="dsl">Companhia</div><div class="dsv" style="font-size:.82rem">' + cias[0] + '</div></div>'
     + '</div>'
-    + '<div class="ft-ttl">Opções estimadas — preços totais (' + pessoas + ' pax)</div>'
+    + '<div class="ft-ttl" style="margin-bottom:10px">🌤️ Clima no destino</div>'
+    + '<div id="wxSlot"><div class="wx-loading">⟳ Carregando clima...</div></div>'
+    + '<div class="ft-ttl" style="margin-top:16px">Opções estimadas — preços totais (' + pessoas + ' pax)</div>'
     + fr
     + '<div class="notice" style="margin-top:14px;font-size:.68rem">⚠️ Preços sujeitos a alteração pelas companhias aéreas. Sempre confirme no site da companhia.</div>'
     + '<div class="dp-cta">'
@@ -1145,6 +1255,10 @@ function showDetail(idx){
   + '</div>';
 
   document.getElementById('detP').scrollIntoView({behavior:'smooth',block:'nearest'});
+  fetchWeather(d.city).then(function(wx){
+    var slot = document.getElementById('wxSlot');
+    if(slot) slot.innerHTML = buildWeatherHTML(wx, calIdaDate);
+  });
 }
 function closeDetail(){
   selectedIdx = null;
