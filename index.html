@@ -27,6 +27,7 @@
 <div class="bg-grid"></div>
 <div class="noise"></div>
 <div class="ftags" id="ftags"></div>
+<canvas id="planesCanvas" aria-hidden="true"></canvas>
 
 <div class="page">
 
@@ -132,23 +133,31 @@
     ════════════════════════════════════════ -->
     <div class="card results-card" id="step2" style="display:none">
 
-      <!-- Top bar -->
+      <!-- Top bar: título centralizado + controles em linha única -->
       <div class="r-topbar">
-        <div>
+
+        <!-- Título e meta centralizados -->
+        <div class="r-head">
           <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
           <div class="r-meta" id="rMeta"></div>
         </div>
+
+        <!-- Controles: ordenação | visualização | nova busca — todos na mesma linha -->
         <div class="r-controls">
-          <div class="sort-row">
+          <div class="r-ctrl-group">
             <button class="sb active" id="sbP">↑ Menor preço</button>
-            <button class="sb" id="sbR">✦ Nossa sugestão</button>
+            <button class="sb" id="sbR">✦ Sugestão</button>
             <button class="sb" id="sbT">Todos</button>
           </div>
-          <div class="view-row">
+          <div class="r-ctrl-divider"></div>
+          <div class="r-ctrl-group">
             <button class="vb active" id="vbL">☰ Lista</button>
             <button class="vb" id="vbM">🗺 Mapa</button>
           </div>
+          <div class="r-ctrl-divider"></div>
+          <button class="vb" id="btnNovaSearch">← Nova busca</button>
         </div>
+
       </div>
 
       <!-- Filter bar -->
@@ -204,7 +213,6 @@
       <div class="dgrid" id="dgrid"></div>
 
       <div class="cta-row" style="margin-top:4px">
-        <button class="btn-s" id="btnNovaSearch">← Nova busca</button>
         <button class="btn-o" id="btnShare">📤 Compartilhar</button>
       </div>
     </div><!-- /step2 -->
@@ -308,6 +316,9 @@
   }
 })();
 </script>
+
+<!-- Planes background animation -->
+<script src="js/modules/planes.js"></script>
 
 <!-- App orchestrator (must be last) -->
 <script src="js/app.js"></script>

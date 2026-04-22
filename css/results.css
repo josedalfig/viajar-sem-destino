@@ -3,21 +3,33 @@
 
 /* ── Top bar ── */
 .r-topbar {
-  display: flex; align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 1.125rem; gap: .75rem; flex-wrap: wrap;
+  display: flex; flex-direction: column;
+  align-items: center; gap: .75rem;
+  margin-bottom: 1.25rem;
 }
+
+/* Título e meta centralizados */
+.r-head { text-align: center; }
 .r-title {
   font-family: 'Playfair Display', serif;
   font-size: var(--tx-xl); font-weight: 700;
 }
 .r-title span { color: var(--accl); }
-.r-meta { font-size: var(--tx-xs); color: var(--mut); margin-top: .1875rem; line-height: 1.5; }
-.r-controls { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+.r-meta { font-size: var(--tx-xs); color: var(--mut); margin-top: .25rem; line-height: 1.5; }
 
-/* Sort + view buttons */
-.sort-row, .view-row { display: flex; gap: .375rem; }
-.view-row { margin-bottom: 1rem; }
+/* Controles: linha única, todos alinhados */
+.r-controls {
+  display: flex; align-items: center;
+  gap: .375rem; flex-wrap: wrap; justify-content: center;
+}
+.r-ctrl-group { display: flex; gap: .25rem; }
+.r-ctrl-divider {
+  width: 1px; height: 18px;
+  background: rgba(255,255,255,.12);
+  align-self: center; margin: 0 .125rem;
+}
+
+/* Botões de ordenação e visualização — mesma altura, mesmo estilo */
 .sb, .vb {
   padding: .375rem .75rem;
   border-radius: 18px; font-size: var(--tx-xs);
@@ -25,7 +37,8 @@
   border: 1px solid rgba(255,255,255,.09);
   background: transparent; color: var(--mut);
   font-family: 'DM Sans', sans-serif;
-  min-height: 32px;   /* menor que nav mas aceitável neste contexto */
+  height: 30px; line-height: 1;
+  display: flex; align-items: center;
   transition: all var(--dur) var(--ease);
   white-space: nowrap;
 }
@@ -237,8 +250,9 @@
   .dp-stats       { grid-template-columns: 1fr 1fr; }
   .dp-total-stat  { grid-column: 1 / -1; }
   .dp-cta         { flex-direction: column; }
-  .r-topbar       { flex-direction: column; }
-  .r-controls     { flex-wrap: wrap; }
+  .r-head         { text-align: center; }
+  .r-controls     { flex-wrap: wrap; justify-content: center; }
+  .r-ctrl-divider { display: none; }
   .fbar           { flex-direction: column; gap: .75rem; }
   .fbar-sep       { width: 100%; height: 1px; margin: 0; }
   .wx-bar         { grid-template-columns: 1fr; }
