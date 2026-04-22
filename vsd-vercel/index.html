@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Viajar sem Destino</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/base.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/forms.css"/>
+  <link rel="stylesheet" href="css/calendar.css"/>
+  <link rel="stylesheet" href="css/results.css"/>
+  <link rel="stylesheet" href="css/modals.css"/>
+</head>
+<body>
+
+<!-- Backgrounds -->
+<div class="bg"></div>
+<div class="bg-grid"></div>
+<div class="noise"></div>
+<div class="ftags" id="ftags"></div>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="logo">
+      <span class="logo-main">Viajar sem Destino</span>
+      <span class="logo-sub">O melhor destino está aqui</span>
+    </div>
+    <nav>
+      <a href="#">Como funciona</a>
+      <a href="#">Destinos</a>
+      <a href="#" class="nav-cta">Entrar</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="eyebrow">Descubra onde ir</div>
+    <h1>Você decide quando.<br><em>A gente descobre onde.</em></h1>
+    <p class="subtitle">Informe seu budget, datas e quantas pessoas viajam.</p>
+
+    <div class="progress">
+      <div class="dot active" id="dot1"></div>
+      <div class="dot" id="dot2"></div>
+      <div class="dot" id="dot3"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         PASSO 1 — Formulário de busca
+    ════════════════════════════════════════ -->
+    <div class="card" id="step1">
+      <div class="step-lbl"><span class="sdot"></span>Passo 1 de 3 — O essencial</div>
+
+      <!-- Row 1: Origem + Viajantes -->
+      <div class="s1-r1">
+        <div class="field">
+          <label class="lbl">Saindo de</label>
+          <div class="ac-wrap" id="acWrap">
+            <input type="text" id="origem" placeholder="Cidade ou sigla (ex: GRU)" autocomplete="off"/>
+            <button class="geo-btn" id="geoBtn" title="Usar minha localização">📍</button>
+            <div class="ac-drop" id="acDrop" style="display:none"></div>
+          </div>
+          <div class="geo-hint" id="geoHint" style="display:none"></div>
+        </div>
+        <div class="field">
+          <label class="lbl">Pax</label>
+          <input type="number" id="pessoas" min="1" max="20" value="2" style="text-align:center"/>
+        </div>
+      </div>
+
+      <!-- Row 2: Datas -->
+      <div style="margin-bottom:12px">
+        <label class="lbl">Datas</label>
+        <div class="date-fields" id="dateFields">
+          <div class="df-half" id="dfIda">
+            <span class="df-lbl">Ida</span>
+            <span class="df-val placeholder" id="dfIdaVal">Selecione</span>
+          </div>
+          <div class="df-half" id="dfVolta">
+            <span class="df-lbl">Volta</span>
+            <span class="df-val placeholder" id="dfVoltaVal">Opcional</span>
+            <button class="df-clear" id="dfClear" title="Remover volta">✕</button>
+          </div>
+        </div>
+        <label class="ow-label" style="margin-top:7px">
+          <input type="checkbox" id="soIda"/>
+          Somente ida — sem data de retorno
+        </label>
+      </div>
+
+      <!-- Row 3: Budget + Destino -->
+      <div class="s1-r3">
+        <div class="field">
+          <label class="lbl">Budget total</label>
+          <div class="brow">
+            <select class="msel" id="moeda">
+              <option value="BRL">R$</option>
+              <option value="USD">US$</option>
+              <option value="EUR">€</option>
+            </select>
+            <input type="text" id="budget" placeholder="15.000" inputmode="numeric"/>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl">Destino</label>
+          <select id="destType">
+            <option value="todos">Qualquer lugar</option>
+            <option value="nacional">Só Brasil</option>
+            <option value="internacional">Só internacional</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn-p" id="btnBuscar">Buscar destinos →</button>
+        <button class="btn-s" id="btnSurpresa">✦ Surpresa</button>
+      </div>
+    </div><!-- /step1 -->
+
+    <!-- ════════════════════════════════════════
+         PASSO 2 — Resultados + Filtros
+    ════════════════════════════════════════ -->
+    <div class="card results-card" id="step2" style="display:none">
+
+      <!-- Top bar -->
+      <div class="r-topbar">
+        <div>
+          <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
+          <div class="r-meta" id="rMeta"></div>
+        </div>
+        <div class="r-controls">
+          <div class="sort-row">
+            <button class="sb active" id="sbP">↑ Menor preço</button>
+            <button class="sb" id="sbR">✦ Nossa sugestão</button>
+            <button class="sb" id="sbT">Todos</button>
+          </div>
+          <div class="view-row">
+            <button class="vb active" id="vbL">☰ Lista</button>
+            <button class="vb" id="vbM">🗺 Mapa</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="fbar">
+        <div class="fbar-group">
+          <div class="fbar-label">Clima <span style="font-size:.55rem;opacity:.6">(um)</span></div>
+          <div class="chips" id="climaChips">
+            <div class="chip" data-group="clima" data-val="calor">☀️ Calor</div>
+            <div class="chip" data-group="clima" data-val="frio">❄️ Frio</div>
+            <div class="chip" data-group="clima" data-val="praia">🏖️ Praia</div>
+            <div class="chip" data-group="clima" data-val="montanha">⛰️ Serra</div>
+            <div class="chip" data-group="clima" data-val="temperado">🍂 Temperado</div>
+          </div>
+        </div>
+        <div class="fbar-sep"></div>
+        <div class="fbar-group">
+          <div class="fbar-label">Tipo de viagem <span style="font-size:.55rem;opacity:.6">(múltiplo)</span></div>
+          <div class="chips" id="tipoChips">
+            <div class="chip" data-group="tipo" data-val="gastronomia">🍽️ Gastronomia</div>
+            <div class="chip" data-group="tipo" data-val="cultura">🏛️ Cultura</div>
+            <div class="chip" data-group="tipo" data-val="aventura">🧗 Aventura</div>
+            <div class="chip" data-group="tipo" data-val="relaxar">🧘 Relaxar</div>
+            <div class="chip" data-group="tipo" data-val="familia">👨‍👩‍👧 Família</div>
+            <div class="chip" data-group="tipo" data-val="romantica">💑 Romântica</div>
+          </div>
+        </div>
+        <div class="fbar-sep"></div>
+        <div class="fbar-group fbar-cia">
+          <div class="fbar-label">Companhia</div>
+          <div class="cia-line">
+            <select class="cia-sel" id="ciaP">
+              <option value="">Qualquer</option>
+              <option value="Latam">LATAM</option>
+              <option value="Gol">GOL</option>
+              <option value="Azul">Azul</option>
+              <option value="TAP">TAP</option>
+              <option value="American">American</option>
+              <option value="Avianca">Avianca</option>
+              <option value="Copa Airlines">Copa</option>
+            </select>
+            <label class="ckl">
+              <input type="checkbox" id="mesmaCia"/> Voo combinado
+            </label>
+          </div>
+        </div>
+        <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar filtros</button>
+      </div>
+
+      <div class="notice">ℹ️ Preços estimados com base em rotas reais. Valores ao vivo via Amadeus em breve.</div>
+
+      <div id="detP"></div>
+      <div id="mapBox"></div>
+      <div class="dgrid" id="dgrid"></div>
+
+      <div class="cta-row" style="margin-top:4px">
+        <button class="btn-s" id="btnNovaSearch">← Nova busca</button>
+        <button class="btn-o" id="btnShare">📤 Compartilhar</button>
+      </div>
+    </div><!-- /step2 -->
+
+  </div><!-- /hero -->
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><div class="sn">180+</div><div class="sl2">Destinos</div></div>
+    <div class="stat"><div class="sn">50+</div><div class="sl2">Companhias</div></div>
+    <div class="stat"><div class="sn">100%</div><div class="sl2">Rotas reais</div></div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ── Calendar overlay ── -->
+<div class="cal-overlay" id="calOverlay">
+  <div class="cal-backdrop"></div>
+  <div class="cal-popup" id="calPopup">
+    <div class="cal-header">
+      <button class="cal-nav" id="calPrev">‹</button>
+      <div class="cal-month-label" id="calLabel"></div>
+      <button class="cal-nav" id="calNext">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-hint" id="calHint">Selecione a data de ida</div>
+  </div>
+</div>
+
+<!-- ── Share modal ── -->
+<div class="share-modal" id="shareModal">
+  <div class="share-box">
+    <button class="share-close" id="shareModalClose">✕</button>
+    <div class="share-title">Compartilhar pesquisa</div>
+    <div class="share-sub">
+      Envie sua busca — o link abrirá com todos os dados já preenchidos.<br>
+      ⚠️ Preços sujeitos a alteração pelas companhias aéreas.
+    </div>
+    <div class="share-btns">
+      <a class="share-wa" id="shareWaLink" href="#" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.933 1.395 5.61L0 24l6.545-1.371A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.372l-.36-.214-3.724.977.997-3.645-.235-.374A9.818 9.818 0 1112 21.818z"/>
+        </svg>
+        WhatsApp
+      </a>
+      <a class="share-email" id="shareEmailLink" href="#">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,12 2,6"/>
+        </svg>
+        E-mail
+      </a>
+    </div>
+    <div class="share-url-row">
+      <input type="text" id="shareURLInput" readonly placeholder="Link da pesquisa"/>
+      <button id="shareCopyBtn">Copiar link</button>
+    </div>
+    <div class="share-disclaimer">
+      Os preços exibidos são estimativas baseadas em rotas reais e podem variar.
+      Sempre confirme o valor final diretamente no site da companhia aérea.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     JavaScript — data, modules, app
+════════════════════════════════════════ -->
+
+<!-- Data -->
+<script src="js/state.js"></script>
+<script src="js/data/airports.js"></script>
+<script src="js/data/destinations.js"></script>
+<script src="js/data/coordinates.js"></script>
+
+<!-- Modules (order matters — dependencies first) -->
+<script src="js/modules/currency.js"></script>
+<script src="js/modules/calendar.js"></script>
+<script src="js/modules/autocomplete.js"></script>
+<script src="js/modules/weather.js"></script>
+<script src="js/modules/search.js"></script>
+<script src="js/modules/empty-state.js"></script>
+<script src="js/modules/cards.js"></script>
+<script src="js/modules/map.js"></script>
+<script src="js/modules/share.js"></script>
+
+<!-- Floating tags (self-contained, no deps) -->
+<script>
+(function(){
+  const TAGS = ['Tóquio','Lisboa','Nova York','Buenos Aires','Paris','Cancún','Bangkok',
+                'Amsterdã','Roma','Sydney','Cidade do Cabo','Kyoto','Havana','Barcelona',
+                'Reykjavik','Santorini','Miami','Praga','Vancouver','Florianópolis','Santiago'];
+  for (let i = 0; i < 14; i++) {
+    const el = document.createElement('div');
+    el.className = 'ftag';
+    el.textContent = TAGS[i % TAGS.length];
+    el.style.cssText = 'left:' + Math.random()*100 + '%;top:' + (25+Math.random()*60) + '%;'
+      + 'animation-duration:' + (20+Math.random()*16) + 's;'
+      + 'animation-delay:-' + Math.random()*20 + 's';
+    document.getElementById('ftags').appendChild(el);
+  }
+})();
+</script>
+
+<!-- App orchestrator (must be last) -->
+<script src="js/app.js"></script>
+
+</body>
+</html>

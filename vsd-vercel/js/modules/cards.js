@@ -1,0 +1,146 @@
+/**
+ * modules/cards.js — Destination cards and detail panel
+ * Depends on: state.js, modules/currency.js, modules/weather.js
+ */
+
+const Cards = (() => {
+
+  // ── Render card grid ─────────────────────────────────────────────
+  function render() {
+    const results    = AppState.get('results');
+    const passengers = parseInt(document.getElementById('pessoas').value) || 1;
+    const selectedIdx= AppState.get('selectedIdx');
+    const comboFlight= document.getElementById('mesmaCia').checked;
+    const ciaFilter  = document.getElementById('ciaP').value;
+
+    if (!results.length) {
+      document.getElementById('dgrid').innerHTML = EmptyState.build();
+      return;
+    }
+
+    // Float selected card to top
+    let ordered = [...results];
+    if (selectedIdx !== null && selectedIdx < results.length) {
+      const sel = ordered.splice(selectedIdx, 1)[0];
+      ordered.unshift(sel);
+    }
+
+    document.getElementById('dgrid').innerHTML = ordered.map((d, i) => {
+      const origIdx = results.indexOf(d);
+      const cias    = ciaFilter && d.airlines.includes(ciaFilter)
+        ? [ciaFilter, ...d.airlines.filter(a => a !== ciaFilter)]
+        : d.airlines;
+      const ciaLbl  = comboFlight
+        ? cias[0] + ' · ida e volta'
+        : cias[0] + (cias[1] ? ' / ' + cias[1] : '');
+
+      const isBest  = i === 0 && selectedIdx === null;
+      const isSel   = selectedIdx !== null && results[selectedIdx] === d;
+      const bg      = d.img ? '<div class="dc-bg" style="background-image:url(\'' + d.img + '\')"></div>' : '';
+      const tags    = d.tags.map(t => '<span class="dc-tag">' + t + '</span>').join('');
+
+      return '<div class="dc' + (isBest ? ' feat' : '') + (isSel ? ' dc-selected' : '') + '"'
+        + ' onclick="Cards.showDetail(' + origIdx + ')">'
+        + bg
+        + '<div class="dc-inner">'
+          + '<div>'
+            + '<div class="dc-badge"><span class="bdot"></span>' + (isBest ? '✦ Nossa sugestão' : d.tags[0]) + '</div>'
+            + '<div class="dc-city">' + d.city + '</div>'
+            + '<div class="dc-country">' + d.country + '</div>'
+          + '</div>'
+          + '<div>'
+            + '<div class="dc-bot">'
+              + '<div>'
+                + '<div class="dc-pm">' + Currency.format(d.price * passengers) + ' <span style="font-size:.62rem;color:var(--mut)">' + passengers + ' pax</span></div>'
+                + '<div class="dc-ps">' + Currency.format(d.price) + '/pessoa</div>'
+              + '</div>'
+              + '<div class="dc-tags">' + tags + '</div>'
+            + '</div>'
+            + '<div class="dc-cia">✈ ' + ciaLbl + '</div>'
+          + '</div>'
+        + '</div>'
+      + '</div>';
+    }).join('');
+  }
+
+  // ── Show detail panel ────────────────────────────────────────────
+  function showDetail(idx) {
+    const results    = AppState.get('results');
+    const d          = results[idx];
+    const passengers = parseInt(document.getElementById('pessoas').value) || 1;
+    const comboFlight= document.getElementById('mesmaCia').checked;
+    const ciaFilter  = document.getElementById('ciaP').value;
+    const soIda      = AppState.get('onewayOnly');
+    const ida        = AppState.get('idaDate');
+    const volta      = AppState.get('voltaDate');
+
+    const fmtD = v => v ? v.toLocaleDateString('pt-BR', { day:'2-digit', month:'short' }) : '—';
+    const cias = ciaFilter && d.airlines.includes(ciaFilter)
+      ? [ciaFilter, ...d.airlines.filter(a => a !== ciaFilter)]
+      : d.airlines;
+
+    const flightRows = cias.slice(0, 3).map((a, i) => {
+      const mult   = [1, 1.07, 0.96][i] || 1;
+      const t      = d.times[i] || d.times[0];
+      const retInfo= comboFlight ? ' · volta inclusa' : '';
+      return '<div class="fr">'
+        + '<div class="fa">' + a + retInfo + '</div>'
+        + '<div class="ftm">' + t + '</div>'
+        + '<div class="fp">' + Currency.format(Math.round(d.price * mult * passengers)) + ' <span style="font-size:.65rem;opacity:.7">' + passengers + 'px</span></div>'
+      + '</div>';
+    }).join('');
+
+    // Update state and re-render cards so selected floats up
+    AppState.set('selectedIdx', idx);
+    render();
+
+    // Build panel
+    document.getElementById('detP').innerHTML =
+      '<div class="dp">'
+      + '<div class="dp-head">'
+        + '<div><div class="dp-city">' + d.city + '</div>'
+        + '<div class="dp-ctry">' + d.country + ' &nbsp;·&nbsp; ⭐ ' + d.rating + '</div></div>'
+        + '<button class="xbtn" onclick="Cards.closeDetail()">✕ Fechar</button>'
+      + '</div>'
+      + '<p class="dp-desc">' + d.desc + '</p>'
+      + '<div class="dp-stats">'
+        + '<div class="dst dp-total-stat">'
+          + '<div class="dsl">Total da viagem (' + passengers + ' pax)</div>'
+          + '<div class="dsv dp-total-val">' + Currency.format(d.price * passengers) + '</div>'
+          + '<div class="dsl" style="margin-top:3px">' + Currency.format(d.price) + ' por pessoa</div>'
+        + '</div>'
+        + '<div class="dst"><div class="dsl">Ida</div><div class="dsv">' + fmtD(ida) + '</div></div>'
+        + '<div class="dst"><div class="dsl">Volta</div><div class="dsv">' + (soIda ? 'Só ida' : fmtD(volta)) + '</div></div>'
+        + '<div class="dst"><div class="dsl">Companhia</div><div class="dsv" style="font-size:.82rem">' + cias[0] + '</div></div>'
+      + '</div>'
+      + '<div class="ft-ttl" style="margin-bottom:10px">🌤️ Clima no destino</div>'
+      + '<div id="wxSlot"><div class="wx-loading">⟳ Carregando clima...</div></div>'
+      + '<div class="ft-ttl" style="margin-top:16px">Opções estimadas — preços totais (' + passengers + ' pax)</div>'
+      + flightRows
+      + '<div class="notice" style="margin-top:14px;font-size:.68rem">⚠️ Preços sujeitos a alteração pelas companhias aéreas. Sempre confirme no site da companhia.</div>'
+      + '<div class="dp-cta">'
+        + '<button class="btn-book" onclick="Cards.goBook(\'' + d.city + '\',\'' + cias[0] + '\')">Buscar na ' + cias[0] + ' →</button>'
+        + '<button class="btn-o" onclick="Cards.closeDetail()">Ver outros</button>'
+      + '</div>'
+    + '</div>';
+
+    document.getElementById('detP').scrollIntoView({ behavior:'smooth', block:'nearest' });
+
+    // Load weather async — never blocks UI
+    Weather.inject(d.city);
+  }
+
+  function closeDetail() {
+    AppState.set('selectedIdx', null);
+    document.getElementById('detP').innerHTML = '';
+    render();
+  }
+
+  function goBook(city, airline) {
+    const ida = AppState.get('idaDate');
+    const q   = encodeURIComponent('voos ' + AppState.get('originIata') + ' ' + city + ' ' + (ida ? ida.toISOString().split('T')[0] : ''));
+    window.open('https://www.google.com/travel/flights?q=' + q, '_blank');
+  }
+
+  return { render, showDetail, closeDetail, goBook };
+})();
