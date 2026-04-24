@@ -74,13 +74,14 @@
 }
 .fbar-clear:hover { border-color: var(--acc); color: var(--sand); }
 
-/* Notice */
-.notice {
-  background: rgba(201,98,47,.07);
-  border: 1px solid rgba(201,98,47,.17);
-  border-radius: var(--radius-sm);
-  padding: .5rem .8125rem; margin-bottom: 1rem;
-  font-size: var(--tx-xs); color: rgba(232,132,90,.72); line-height: 1.5;
+/* Notice — hidden now, kept for potential future use */
+.notice { display: none; }
+/* Disclaimer inside detail panel */
+.dp-disclaimer {
+  font-size: var(--tx-xs); color: rgba(138,127,118,.5);
+  margin-top: .75rem; padding-top: .625rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+  line-height: 1.5;
 }
 
 /* ── Destination cards ── */
@@ -139,9 +140,10 @@
   margin-bottom: 1.125rem;
   animation: fadeUp .3s var(--ease) both;
 }
-.dp-head    { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .75rem; }
-.dp-city    { font-family: 'Playfair Display', serif; font-size: var(--tx-2xl); font-weight: 700; }
-.dp-ctry    { font-size: var(--tx-sm); color: var(--mut); margin-top: .125rem; }
+.dp-head     { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .75rem; }
+.dp-city-row { display: flex; align-items: baseline; gap: .625rem; flex-wrap: wrap; }
+.dp-city     { font-family: 'Playfair Display', serif; font-size: var(--tx-2xl); font-weight: 700; }
+.dp-ctry     { font-size: var(--tx-sm); color: var(--mut); }
 .xbtn {
   background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
   border-radius: var(--radius-sm);
@@ -158,18 +160,17 @@
 /* Detail stats */
 .dp-stats {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: .5625rem; margin-bottom: 1rem;
+  gap: .5rem; margin-bottom: 1rem;
 }
 .dst {
   background: rgba(255,255,255,.038);
   border-radius: var(--radius-sm);
-  padding: .6875rem .8125rem;
+  padding: .625rem .75rem;
   border: 1px solid rgba(255,255,255,.06);
 }
-.dsl { font-size: var(--tx-xs); letter-spacing: .13em; text-transform: uppercase; color: var(--mut); margin-bottom: .25rem; }
-.dsv { font-size: var(--tx-base); font-weight: 500; }
-.dp-total-stat { grid-column: span 2; }
-.dp-total-val  { font-size: var(--tx-xl) !important; color: var(--accl); }
+.dsl { font-size: var(--tx-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--mut); margin-bottom: .2rem; }
+.dsv { font-size: var(--tx-sm); font-weight: 500; }
+.dp-total-val { font-size: var(--tx-base) !important; color: var(--accl); font-weight: 700; }
 
 /* Flight rows */
 .ft-ttl { font-size: var(--tx-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--mut); margin-bottom: .5625rem; }
@@ -200,13 +201,13 @@
 .btn-book:hover { background: var(--accl); transform: translateY(-1px); }
 
 /* ── Weather ── */
-.wx-bar  { display: grid; grid-template-columns: 1fr 1fr; gap: .625rem; margin-bottom: 1rem; }
-.wx-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius-sm); padding: .75rem .875rem; display: flex; align-items: center; gap: .75rem; }
-.wx-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
-.wx-label { font-size: var(--tx-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--mut); margin-bottom: .1875rem; }
-.wx-temp  { font-size: var(--tx-lg); font-weight: 600; color: var(--sand); }
-.wx-desc  { font-size: var(--tx-xs); color: var(--mut); margin-top: .125rem; text-transform: capitalize; }
-.wx-loading { opacity: .5; font-size: var(--tx-sm); color: var(--mut); display: flex; align-items: center; gap: .375rem; }
+.wx-bar  { display: flex; gap: .5rem; margin-bottom: .875rem; flex-wrap: wrap; }
+.wx-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-sm); padding: .5rem .75rem; display: flex; align-items: center; gap: .5rem; flex: 1; min-width: 120px; }
+.wx-icon { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+.wx-label { font-size: var(--tx-xs); color: var(--mut); margin-bottom: .1rem; opacity: .7; }
+.wx-temp  { font-size: var(--tx-base); font-weight: 600; color: var(--sand); }
+.wx-desc  { font-size: var(--tx-xs); color: var(--mut); text-transform: capitalize; }
+.wx-loading { opacity: .5; font-size: var(--tx-xs); color: var(--mut); display: flex; align-items: center; gap: .25rem; }
 .wx-err     { font-size: var(--tx-xs); color: rgba(138,127,118,.5); }
 
 /* ── Map ── */
@@ -248,7 +249,6 @@
 @media (max-width: 600px) {
   .dgrid          { grid-template-columns: 1fr; }
   .dp-stats       { grid-template-columns: 1fr 1fr; }
-  .dp-total-stat  { grid-column: 1 / -1; }
   .dp-cta         { flex-direction: column; }
   .r-head         { text-align: center; }
   .r-controls     { flex-wrap: wrap; justify-content: center; }

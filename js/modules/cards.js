@@ -117,7 +117,7 @@ const Cards = (() => {
       + '<div id="wxSlot"><div class="wx-loading">⟳ Carregando clima...</div></div>'
       + '<div class="ft-ttl" style="margin-top:16px" id="ftTtlSlot">Opções estimadas — preços totais (' + passengers + ' pax)</div>'
       + '<div id="ftSlot">' + flightRows + '</div>'
-      + '<div class="notice" style="margin-top:14px;font-size:.68rem">⚠️ Preços sujeitos a alteração pelas companhias aéreas. Sempre confirme no site da companhia.</div>'
+      + '<div class="dp-disclaimer">⚠️ Preços sujeitos a alteração. Confirme sempre no site da companhia.</div>'
       + '<div class="dp-cta">'
         + '<button class="btn-book" onclick="Cards.goBook(\'' + d.city + '\',\'' + cias[0] + '\')">Buscar na ' + cias[0] + ' →</button>'
         + '<button class="btn-o" onclick="Cards.closeDetail()">Ver outros</button>'

@@ -16,9 +16,9 @@
     count:     6,          // number of simultaneous planes
     minSpeed:  0.25,       // px/frame
     maxSpeed:  0.55,
-    minScale:  0.6,
-    maxScale:  1.4,
-    opacity:   0.09,       // visible but subtle
+    minScale:  1.2,
+    maxScale:  2.2,
+    opacity:   0.11,
     spawnEdge: true,       // planes come from edges
   };
 
@@ -82,8 +82,8 @@
     planes.forEach(p => {
       ctx.save();
       ctx.translate(p.x, p.y);
-      // Rotate so plane faces direction of travel
-      ctx.rotate((p.angle - 45) * Math.PI / 180);
+      // Rotate so plane faces direction of travel (✈ faces right = 0°)
+      ctx.rotate(p.angle * Math.PI / 180);
       ctx.globalAlpha = p.alpha;
       ctx.font = p.fontSize + 'px sans-serif';
       ctx.fillStyle = '#f5efe6';  // sand color — visible on dark bg

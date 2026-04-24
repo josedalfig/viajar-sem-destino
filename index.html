@@ -158,33 +158,20 @@
 
       </div>
 
-      <!-- Filter bar -->
+      <!-- Filter bar: Row 1 = Clima + Cia Aérea | Row 2 = Tipo de Viagem -->
       <div class="fbar">
         <div class="fbar-group">
-          <div class="fbar-label">Clima <span style="font-size:.55rem;opacity:.6">(um)</span></div>
+          <div class="fbar-label">Clima <span style="font-size:.52rem;opacity:.55">(um)</span></div>
           <div class="chips" id="climaChips">
             <div class="chip" data-group="clima" data-val="calor">☀️ Calor</div>
             <div class="chip" data-group="clima" data-val="frio">❄️ Frio</div>
             <div class="chip" data-group="clima" data-val="praia">🏖️ Praia</div>
             <div class="chip" data-group="clima" data-val="montanha">⛰️ Serra</div>
-            <div class="chip" data-group="clima" data-val="temperado">🍂 Temperado</div>
+            <div class="chip" data-group="clima" data-val="temperado">🍂 Temp.</div>
           </div>
         </div>
-        <div class="fbar-sep"></div>
-        <div class="fbar-group">
-          <div class="fbar-label">Tipo de viagem <span style="font-size:.55rem;opacity:.6">(múltiplo)</span></div>
-          <div class="chips" id="tipoChips">
-            <div class="chip" data-group="tipo" data-val="gastronomia">🍽️ Gastronomia</div>
-            <div class="chip" data-group="tipo" data-val="cultura">🏛️ Cultura</div>
-            <div class="chip" data-group="tipo" data-val="aventura">🧗 Aventura</div>
-            <div class="chip" data-group="tipo" data-val="relaxar">🧘 Relaxar</div>
-            <div class="chip" data-group="tipo" data-val="familia">👨‍👩‍👧 Família</div>
-            <div class="chip" data-group="tipo" data-val="romantica">💑 Romântica</div>
-          </div>
-        </div>
-        <div class="fbar-sep"></div>
         <div class="fbar-group fbar-cia">
-          <div class="fbar-label">Companhia</div>
+          <div class="fbar-label">Cia Aérea</div>
           <div class="cia-line">
             <select class="cia-sel" id="ciaP">
               <option value="">Qualquer</option>
@@ -196,15 +183,22 @@
               <option value="Avianca">Avianca</option>
               <option value="Copa Airlines">Copa</option>
             </select>
-            <label class="ckl">
-              <input type="checkbox" id="mesmaCia"/> Voo combinado
-            </label>
+            <label class="ckl"><input type="checkbox" id="mesmaCia"/> Voo combinado</label>
+          </div>
+        </div>
+        <div class="fbar-group fbar-tipo">
+          <div class="fbar-label">Tipo de viagem <span style="font-size:.52rem;opacity:.55">(múltiplo)</span></div>
+          <div class="chips" id="tipoChips">
+            <div class="chip" data-group="tipo" data-val="gastronomia">🍽️ Gastronomia</div>
+            <div class="chip" data-group="tipo" data-val="cultura">🏛️ Cultura</div>
+            <div class="chip" data-group="tipo" data-val="aventura">🧗 Aventura</div>
+            <div class="chip" data-group="tipo" data-val="relaxar">🧘 Relaxar</div>
+            <div class="chip" data-group="tipo" data-val="familia">👨‍👩‍👧 Família</div>
+            <div class="chip" data-group="tipo" data-val="romantica">💑 Romântica</div>
           </div>
         </div>
         <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar filtros</button>
       </div>
-
-      <div class="notice">ℹ️ Preços estimados com base em rotas reais. Valores ao vivo via Amadeus em breve.</div>
 
       <div id="detP"></div>
       <div id="mapBox"></div>

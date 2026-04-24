@@ -24,6 +24,8 @@ const EmptyState = (() => {
   function _buildQuaseLa(pool, budget, passengers, climaFilter, tipoFilters) {
     const candidates = pool
       .filter(d => {
+        // Only show destinations that are OVER budget (that's the whole point)
+        if (d.price * passengers <= budget) return false;
         const climaOk = !climaFilter || d.clima.includes(climaFilter);
         const tipoOk  = !tipoFilters.length || tipoFilters.some(t => d.tipo.includes(t));
         return climaOk && tipoOk;

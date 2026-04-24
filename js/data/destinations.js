@@ -44,7 +44,7 @@ const DESTS = {
       desc: 'Dunas douradas, lagoas de água morna e o melhor litoral nordestino.',
       rating: 4.7,
       times: ['05:30→08:15','14:00→16:45'],
-      img: 'https://images.unsplash.com/photo-1590500550060-d9a1e95a0fd5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=70',
     },
     {
       city: 'Foz do Iguaçu', country: '🇧🇷 Brasil', iata: 'IGU',
@@ -74,7 +74,7 @@ const DESTS = {
       desc: 'Porto de Galinhas a 1h e o frevo vibrante do Nordeste.',
       rating: 4.7,
       times: ['06:00→08:40','19:30→22:10'],
-      img: 'https://images.unsplash.com/photo-1563208963-843fe24e65e3?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1558612789-98394cf4c4af?w=800&q=70',
     },
     {
       city: 'Manaus', country: '🇧🇷 Brasil', iata: 'MAO',
@@ -157,7 +157,7 @@ const DESTS = {
       desc: 'Coliseu, Vaticano, gelato e la dolce vita — história em cada esquina.',
       rating: 4.9,
       times: ['18:30→11:00+1','21:00→13:30+1'],
-      img: 'https://images.unsplash.com/photo-1552832230-c0197dd611b5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=70',
     },
     {
       city: 'Barcelona', country: '🇪🇸 Espanha', iata: 'BCN',

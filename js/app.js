@@ -35,14 +35,14 @@ const App = (() => {
   }
 
   // ── Search flow ──────────────────────────────────────────────────
-  function runSearch() {
-    Search.run();
+  async function runSearch() {
+    await Search.run();
     Search.updateMeta();
     _updateFilterClearBtn();
     Cards.render();
   }
 
-  function startSearch() {
+  async function startSearch() {
     const ida    = AppState.get('idaDate');
     const budget = Currency.getBudgetBRL();
 
@@ -61,7 +61,7 @@ const App = (() => {
       .forEach(c => c.classList.remove('active'));
 
     goStep(2);
-    runSearch();
+    await runSearch();
   }
 
   function surpresa() {
@@ -86,10 +86,10 @@ const App = (() => {
     document.getElementById('fbarClear').style.display = hasFilters ? 'block' : 'none';
   }
 
-  function clearFilters() {
+  async function clearFilters() {
     Search.clearFilters();
     _updateFilterClearBtn();
-    runSearch();
+    await runSearch();
   }
 
   // ── Event wiring ─────────────────────────────────────────────────
