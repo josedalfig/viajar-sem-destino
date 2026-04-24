@@ -37,7 +37,6 @@ const Weather = (() => {
       const fcast = await fcastResp.json();
 
       if (cur.cod && cur.cod !== 200) {
-        console.warn('[Weather] API error:', cur.message);
         return { error: cur.message };
       }
 
@@ -58,7 +57,6 @@ const Weather = (() => {
         } : null,
       };
     } catch (e) {
-      console.error('[Weather] Fetch failed:', e);
       return null;
     }
   }

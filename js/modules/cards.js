@@ -115,8 +115,8 @@ const Cards = (() => {
       + '</div>'
       + '<div class="ft-ttl" style="margin-bottom:10px">🌤️ Clima no destino</div>'
       + '<div id="wxSlot"><div class="wx-loading">⟳ Carregando clima...</div></div>'
-      + '<div class="ft-ttl" style="margin-top:16px">Opções estimadas — preços totais (' + passengers + ' pax)</div>'
-      + flightRows
+      + '<div class="ft-ttl" style="margin-top:16px" id="ftTtlSlot">Opções estimadas — preços totais (' + passengers + ' pax)</div>'
+      + '<div id="ftSlot">' + flightRows + '</div>'
       + '<div class="notice" style="margin-top:14px;font-size:.68rem">⚠️ Preços sujeitos a alteração pelas companhias aéreas. Sempre confirme no site da companhia.</div>'
       + '<div class="dp-cta">'
         + '<button class="btn-book" onclick="Cards.goBook(\'' + d.city + '\',\'' + cias[0] + '\')">Buscar na ' + cias[0] + ' →</button>'
@@ -126,8 +126,9 @@ const Cards = (() => {
 
     document.getElementById('detP').scrollIntoView({ behavior:'smooth', block:'nearest' });
 
-    // Load weather async — never blocks UI
+    // Load weather and live flights async — never blocks UI
     Weather.inject(d.city);
+    _injectLiveFlights(d, passengers);
   }
 
   function closeDetail() {
@@ -140,6 +141,44 @@ const Cards = (() => {
     const ida = AppState.get('idaDate');
     const q   = encodeURIComponent('voos ' + AppState.get('originIata') + ' ' + city + ' ' + (ida ? ida.toISOString().split('T')[0] : ''));
     window.open('https://www.google.com/travel/flights?q=' + q, '_blank');
+  }
+
+  // ── Inject live flight options into open detail panel ────────────
+  async function _injectLiveFlights(d, passengers) {
+    const originIata = AppState.get('originIata');
+    const idaDate    = AppState.get('idaDate');
+    const voltaDate  = AppState.get('voltaDate');
+    if (!idaDate) return;
+
+    const departDate = idaDate.toISOString().split('T')[0];
+    const returnDate = voltaDate ? voltaDate.toISOString().split('T')[0] : null;
+
+    const liveFlights = await Flights.getDetailFlights(
+      originIata, d.iata, departDate, returnDate, passengers
+    );
+    if (!liveFlights || !liveFlights.length) return;
+
+    // Replace estimated flight rows with live ones
+    const ftSlot = document.getElementById('ftSlot');
+    if (!ftSlot) return;
+
+    ftSlot.innerHTML = liveFlights.map(f => {
+      const stops   = f.stops === 0 ? 'Direto' : f.stops + ' parada' + (f.stops > 1 ? 's' : '');
+      const bookUrl = f.deepLink || ('https://www.google.com/travel/flights?q=' +
+        encodeURIComponent('voos ' + originIata + ' ' + d.iata + ' ' + departDate));
+      const onclk = 'window.open(' + JSON.stringify(bookUrl) + ',\'_blank\')';
+      return '<div class="fr">'
+        + '<div class="fa">' + f.airline + ' <span style="font-size:.65rem;opacity:.6">' + stops + ' · ' + f.duration + '</span></div>'
+        + '<div class="ftm">' + f.time + '</div>'
+        + '<div class="fp" style="cursor:pointer" onclick="' + onclk + '">'
+          + Currency.format(f.price * passengers) + ' →'
+        + '</div>'
+      + '</div>';
+    }).join('');
+
+    // Update the title to show live prices
+    const ftTtl = document.getElementById('ftTtlSlot');
+    if (ftTtl) ftTtl.textContent = '✅ Voos disponíveis — preços ao vivo (' + passengers + ' pax)';
   }
 
   return { render, showDetail, closeDetail, goBook };

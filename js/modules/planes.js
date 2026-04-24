@@ -14,11 +14,11 @@
   // ── Config ───────────────────────────────────────────────────────
   const CFG = {
     count:     6,          // number of simultaneous planes
-    minSpeed:  0.18,       // px/frame
-    maxSpeed:  0.45,
+    minSpeed:  0.25,       // px/frame
+    maxSpeed:  0.55,
     minScale:  0.6,
     maxScale:  1.4,
-    opacity:   0.055,      // very faint
+    opacity:   0.09,       // visible but subtle
     spawnEdge: true,       // planes come from edges
   };
 
@@ -86,7 +86,7 @@
       ctx.rotate((p.angle - 45) * Math.PI / 180);
       ctx.globalAlpha = p.alpha;
       ctx.font = p.fontSize + 'px sans-serif';
-      ctx.fillStyle = '#e8845a';
+      ctx.fillStyle = '#f5efe6';  // sand color — visible on dark bg
       ctx.fillText(GLYPH, 0, 0);
       ctx.restore();
     });

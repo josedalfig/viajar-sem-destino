@@ -14,7 +14,7 @@ const DESTS = {
       desc: 'Ilha da Magia — 42 praias, lagoas cristalinas e o melhor da vida litorânea.',
       rating: 4.8,
       times: ['06:10→07:20','11:30→12:40','17:50→19:00'],
-      img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1564189410869-4a7747fcb81f?w=800&q=70',
     },
     {
       city: 'Rio de Janeiro', country: '🇧🇷 Brasil', iata: 'GIG',
@@ -34,7 +34,7 @@ const DESTS = {
       desc: 'Maior metrópole da América Latina e capital gastronômica do Brasil.',
       rating: 4.5,
       times: ['06:00→07:10','12:30→13:40','20:00→21:10'],
-      img: 'https://images.unsplash.com/photo-1578002171272-c1b2e6f70f5e?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=70',
     },
     {
       city: 'Fortaleza', country: '🇧🇷 Brasil', iata: 'FOR',
@@ -44,7 +44,7 @@ const DESTS = {
       desc: 'Dunas douradas, lagoas de água morna e o melhor litoral nordestino.',
       rating: 4.7,
       times: ['05:30→08:15','14:00→16:45'],
-      img: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1590500550060-d9a1e95a0fd5?w=800&q=70',
     },
     {
       city: 'Foz do Iguaçu', country: '🇧🇷 Brasil', iata: 'IGU',
@@ -54,7 +54,7 @@ const DESTS = {
       desc: 'Cataratas do Iguaçu — uma das 7 maravilhas naturais do mundo.',
       rating: 4.9,
       times: ['07:20→09:00','16:30→18:10'],
-      img: 'https://images.unsplash.com/photo-1630940816792-c4a7c52aaba1?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=800&q=70',
     },
     {
       city: 'Salvador', country: '🇧🇷 Brasil', iata: 'SSA',
@@ -64,7 +64,7 @@ const DESTS = {
       desc: 'Pelourinho tombado pela UNESCO, axé e a culinária baiana mais autêntica.',
       rating: 4.8,
       times: ['06:30→09:00','18:20→20:50'],
-      img: 'https://images.unsplash.com/photo-1598981457915-aea220950616?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?w=800&q=70',
     },
     {
       city: 'Recife', country: '🇧🇷 Brasil', iata: 'REC',
@@ -74,7 +74,7 @@ const DESTS = {
       desc: 'Porto de Galinhas a 1h e o frevo vibrante do Nordeste.',
       rating: 4.7,
       times: ['06:00→08:40','19:30→22:10'],
-      img: 'https://images.unsplash.com/photo-1613046506737-9d0ddc5a7e82?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1563208963-843fe24e65e3?w=800&q=70',
     },
     {
       city: 'Manaus', country: '🇧🇷 Brasil', iata: 'MAO',
@@ -84,7 +84,7 @@ const DESTS = {
       desc: 'Portal de entrada para a maior floresta tropical do planeta.',
       rating: 4.6,
       times: ['07:00→10:30','14:00→17:30'],
-      img: 'https://images.unsplash.com/photo-1590500550060-d9a1e95a0fd5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1534108061832-a32f12cf5eef?w=800&q=70',
     },
   ],
 
@@ -117,7 +117,7 @@ const DESTS = {
       desc: 'Cidade tranquila com charme europeu às margens do Rio da Prata.',
       rating: 4.5,
       times: ['08:00→09:50','17:30→19:20'],
-      img: 'https://images.unsplash.com/photo-1563208963-843fe24e65e3?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1580058572462-98e2c0e0e2f0?w=800&q=70',
     },
     {
       city: 'Cancún', country: '🇲🇽 México', iata: 'CUN',
@@ -157,7 +157,7 @@ const DESTS = {
       desc: 'Coliseu, Vaticano, gelato e la dolce vita — história em cada esquina.',
       rating: 4.9,
       times: ['18:30→11:00+1','21:00→13:30+1'],
-      img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1552832230-c0197dd611b5?w=800&q=70',
     },
     {
       city: 'Barcelona', country: '🇪🇸 Espanha', iata: 'BCN',
@@ -177,7 +177,7 @@ const DESTS = {
       desc: 'Capital vibrante a 2.600m de altitude com bairros coloridos e café excepcional.',
       rating: 4.5,
       times: ['06:50→10:00','16:20→19:30'],
-      img: 'https://images.unsplash.com/photo-1597001601145-14cd7a7e8bc8?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&q=70',
     },
     {
       city: 'Cidade do Panamá', country: '🇵🇦 Panamá', iata: 'PTY',

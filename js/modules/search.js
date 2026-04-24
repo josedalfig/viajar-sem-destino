@@ -45,18 +45,56 @@ const Search = (() => {
     return results; // 'todos' — keep filter order
   }
 
-  // ── Public: run search ───────────────────────────────────────────
-  function run() {
+  // ── Public: run search (tries live API, falls back to static) ────
+  async function run() {
     const budget     = Currency.getBudgetBRL();
     const passengers = parseInt(document.getElementById('pessoas').value) || 1;
+    const originIata = AppState.get('originIata');
+    const idaDate    = AppState.get('idaDate');
+    const voltaDate  = AppState.get('voltaDate');
 
-    const pool    = _buildPool();
-    const filtered= _applyFilters(pool, budget, passengers);
-    const sorted  = _applySort(filtered);
+    // Show loading state
+    _setLoading(true);
+
+    let pool;
+    let isLive = false;
+
+    try {
+      // Try live API first
+      const departDate = idaDate ? idaDate.toISOString().split('T')[0] : null;
+      const returnDate = voltaDate ? voltaDate.toISOString().split('T')[0] : null;
+      const liveResult = await Flights.search(originIata, departDate, returnDate, passengers);
+
+      if (liveResult.live && liveResult.results && liveResult.results.length) {
+        pool   = liveResult.results;
+        isLive = true;
+        // Update notice to show live prices
+        const notice = document.querySelector('.notice');
+        if (notice) notice.textContent = '✅ Preços ao vivo — atualizado agora pela Air Scraper API.';
+      } else {
+        throw new Error('No live results');
+      }
+    } catch (e) {
+      // Fallback to static data
+      pool = _buildPool();
+    }
+
+    AppState.set('isLive', isLive);
+    const filtered = _applyFilters(pool, budget, passengers);
+    const sorted   = _applySort(filtered);
 
     AppState.set('results', sorted);
     AppState.set('selectedIdx', null);
+    _setLoading(false);
     return sorted;
+  }
+
+  function _setLoading(on) {
+    const btn = document.getElementById('btnBuscar');
+    if (btn) {
+      btn.textContent = on ? 'Buscando...' : 'Buscar destinos →';
+      btn.disabled    = on;
+    }
   }
 
   // ── Public: update sort ──────────────────────────────────────────
