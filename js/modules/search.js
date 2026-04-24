@@ -31,9 +31,9 @@ const Search = (() => {
 
   function _applySort(results) {
     const mode = AppState.get('sortMode');
-    if (mode === 'preco') {
-      return [...results].sort((a, b) => a.price - b.price);
-    }
+    if (mode === 'preco-asc'  || mode === 'preco') return [...results].sort((a,b) => a.price - b.price);
+    if (mode === 'preco-desc') return [...results].sort((a,b) => b.price - a.price);
+    if (mode === 'az')         return [...results].sort((a,b) => a.city.localeCompare(b.city, 'pt-BR'));
     if (mode === 'sugestao') {
       const maxPrice = Math.max(...results.map(d => d.price));
       return [...results].sort((a, b) => {
@@ -42,7 +42,7 @@ const Search = (() => {
         return scoreB - scoreA;
       });
     }
-    return results; // 'todos' — keep filter order
+    return results;
   }
 
   // ── Public: run search (tries live API, falls back to static) ────
@@ -103,10 +103,6 @@ const Search = (() => {
     const sorted = _applySort(AppState.get('results'));
     AppState.set('results', sorted);
     AppState.set('selectedIdx', null);
-
-    document.getElementById('sbP').classList.toggle('active', mode === 'preco');
-    document.getElementById('sbR').classList.toggle('active', mode === 'sugestao');
-    document.getElementById('sbT').classList.toggle('active', mode === 'todos');
   }
 
   // ── Public: clear filters ────────────────────────────────────────

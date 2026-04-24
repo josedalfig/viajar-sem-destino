@@ -72,7 +72,7 @@
           <div class="geo-hint" id="geoHint" style="display:none"></div>
         </div>
         <div class="field">
-          <label class="lbl">Passageiros</label>
+          <label class="lbl">Pessoas</label>
           <input type="number" id="pessoas" min="1" max="20" value="2" style="text-align:center"/>
         </div>
       </div>
@@ -131,31 +131,31 @@
     ════════════════════════════════════════ -->
     <div class="card results-card" id="step2" style="display:none">
 
-      <!-- Top bar: título centralizado + controles em linha única -->
+      <!-- Top bar -->
       <div class="r-topbar">
-
-        <!-- Título e meta centralizados -->
-        <div class="r-head">
-          <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
-          <div class="r-meta" id="rMeta"></div>
+        <div class="r-topbar-head">
+          <div class="r-head">
+            <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
+            <div class="r-meta" id="rMeta"></div>
+          </div>
+          <button class="btn-nova-busca" id="btnNovaSearch">← Nova busca</button>
         </div>
-
-        <!-- Controles: ordenação | visualização | nova busca — todos na mesma linha -->
         <div class="r-controls">
           <div class="r-ctrl-group">
-            <button class="sb active" id="sbP">↑ Menor preço</button>
-            <button class="sb" id="sbR">✦ Sugestão</button>
-            <button class="sb" id="sbT">Todos</button>
+            <label class="sort-lbl">Ordenar por</label>
+            <select class="sort-sel" id="sortSel">
+              <option value="preco-asc">↑ Menor preço</option>
+              <option value="preco-desc">↓ Maior preço</option>
+              <option value="sugestao">✦ Nossa sugestão</option>
+              <option value="az">A → Z</option>
+            </select>
           </div>
           <div class="r-ctrl-divider"></div>
           <div class="r-ctrl-group">
             <button class="vb active" id="vbL">☰ Lista</button>
             <button class="vb" id="vbM">🗺 Mapa</button>
           </div>
-          <div class="r-ctrl-divider"></div>
-          <button class="vb" id="btnNovaSearch">← Nova busca</button>
         </div>
-
       </div>
 
       <!-- Filter bar: Row 1 = Clima + Cia Aérea | Row 2 = Tipo de Viagem -->

@@ -32,14 +32,14 @@ select option { background: #1a120b; color: var(--sand); }
 .s1-r1 {
   display: grid;
   grid-template-columns: 2.2fr 0.8fr;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-3);
+  gap: .625rem;
+  margin-bottom: .625rem;
 }
 .s1-r3 {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-3);
+  gap: .625rem;
+  margin-bottom: .625rem;
 }
 .field { display: flex; flex-direction: column; }
 
@@ -149,17 +149,6 @@ select option { background: #1a120b; color: var(--sand); }
 .ac-city  { font-size: var(--tx-sm); color: var(--sand); font-weight: 500; }
 .ac-apt   { font-size: var(--tx-xs); color: var(--mut); }
 .geo-hint { font-size: var(--tx-xs); color: var(--mut); margin-top: .3125rem; opacity: .6; }
-
-/* ── Filter bar layout override — 2 rows ── */
-.fbar {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .75rem .875rem;
-}
-.fbar-tipo    { grid-column: 1 / -1; } /* tipo spans full width */
-.fbar-top-row { display: contents; }   /* clima + cia side by side */
-.fbar-sep     { display: none; }       /* no separators in grid layout */
-.fbar-clear   { grid-column: 1 / -1; align-self: center; justify-self: end; margin: 0; }
 
 /* ── Chips ── */
 .chips { display: flex; flex-wrap: wrap; gap: .4375rem; }

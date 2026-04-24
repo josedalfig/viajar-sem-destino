@@ -34,7 +34,7 @@ const DESTS = {
       desc: 'Maior metrópole da América Latina e capital gastronômica do Brasil.',
       rating: 4.5,
       times: ['06:00→07:10','12:30→13:40','20:00→21:10'],
-      img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1554396652-bed5e1c1d4e8?w=800&q=70',
     },
     {
       city: 'Fortaleza', country: '🇧🇷 Brasil', iata: 'FOR',
@@ -44,7 +44,7 @@ const DESTS = {
       desc: 'Dunas douradas, lagoas de água morna e o melhor litoral nordestino.',
       rating: 4.7,
       times: ['05:30→08:15','14:00→16:45'],
-      img: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1544015759-237f99e43f9f?w=800&q=70',
     },
     {
       city: 'Foz do Iguaçu', country: '🇧🇷 Brasil', iata: 'IGU',
@@ -54,7 +54,7 @@ const DESTS = {
       desc: 'Cataratas do Iguaçu — uma das 7 maravilhas naturais do mundo.',
       rating: 4.9,
       times: ['07:20→09:00','16:30→18:10'],
-      img: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=70',
     },
     {
       city: 'Salvador', country: '🇧🇷 Brasil', iata: 'SSA',
@@ -97,7 +97,7 @@ const DESTS = {
       desc: 'A Paris da América do Sul — tango, bife perfeito e arquitetura europeia.',
       rating: 4.8,
       times: ['07:15→09:30','13:40→15:55','21:00→23:15'],
-      img: 'https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=800&q=70',
     },
     {
       city: 'Santiago', country: '🇨🇱 Chile', iata: 'SCL',
@@ -137,7 +137,7 @@ const DESTS = {
       desc: 'South Beach, art déco, compras em Sawgrass e a cena latina dos EUA.',
       rating: 4.7,
       times: ['06:20→10:45','14:30→19:00','22:00→02:30'],
-      img: 'https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&q=70',
     },
     {
       city: 'Lisboa', country: '🇵🇹 Portugal', iata: 'LIS',
@@ -157,7 +157,7 @@ const DESTS = {
       desc: 'Coliseu, Vaticano, gelato e la dolce vita — história em cada esquina.',
       rating: 4.9,
       times: ['18:30→11:00+1','21:00→13:30+1'],
-      img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1552832230-c0197dd611b5?w=800&q=70',
     },
     {
       city: 'Barcelona', country: '🇪🇸 Espanha', iata: 'BCN',
@@ -187,7 +187,7 @@ const DESTS = {
       desc: 'Canal histórico, skyline surpreendente e hub para toda a América Central.',
       rating: 4.4,
       times: ['07:30→11:00','18:45→22:15'],
-      img: 'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1591801258062-3a7ad1bb56ea?w=800&q=70',
     },
   ],
 };

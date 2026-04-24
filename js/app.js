@@ -39,6 +39,9 @@ const App = (() => {
     await Search.run();
     Search.updateMeta();
     _updateFilterClearBtn();
+    // Reset sort dropdown
+    const sel = document.getElementById('sortSel');
+    if (sel) sel.value = 'preco-asc';
     Cards.render();
   }
 
@@ -156,10 +159,11 @@ const App = (() => {
       if (document.getElementById('step2').style.display !== 'none') Cards.render();
     });
 
-    // Sort buttons
-    document.getElementById('sbP').addEventListener('click', () => Search.setSort('preco'));
-    document.getElementById('sbR').addEventListener('click', () => Search.setSort('sugestao'));
-    document.getElementById('sbT').addEventListener('click', () => Search.setSort('todos'));
+    // Sort dropdown
+    document.getElementById('sortSel').addEventListener('change', e => {
+      Search.setSort(e.target.value);
+      Cards.render();
+    });
 
     // View toggle
     document.getElementById('vbL').addEventListener('click', () => MapView.setView('list'));
