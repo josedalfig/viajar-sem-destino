@@ -159,3 +159,51 @@
     transition-duration: .01ms !important;
   }
 }
+
+/* ── Language selector ── */
+.lang-bar {
+  position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  z-index: 999;
+  display: flex; gap: .375rem; align-items: center;
+  background: rgba(13,17,23,.85); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 40px;
+  padding: .3rem .5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+}
+.lang-btn {
+  padding: .3rem .75rem; border-radius: 40px;
+  border: none; background: transparent;
+  color: var(--mut); font-family: 'DM Sans', sans-serif;
+  font-size: var(--tx-xs); cursor: pointer; font-weight: 500;
+  transition: all var(--dur) var(--ease);
+  min-height: var(--touch);
+}
+.lang-btn:hover  { color: var(--sand); }
+.lang-btn.active { background: var(--acc); color: #fff; }
+
+/* ── PWA install banner ── */
+.pwa-banner {
+  position: fixed; bottom: 4rem; left: 50%; transform: translateX(-50%);
+  z-index: 998;
+  display: flex; align-items: center; gap: .75rem;
+  background: rgba(13,17,23,.92); backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,98,47,.3); border-radius: var(--radius-md);
+  padding: .75rem 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  white-space: nowrap;
+}
+.pwa-banner > span { font-size: var(--tx-sm); color: var(--mut); }
+.pwa-install-btn {
+  padding: .4rem 1rem; border-radius: 18px;
+  background: var(--acc); border: none; color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: var(--tx-sm);
+  font-weight: 500; cursor: pointer;
+  transition: background var(--dur);
+}
+.pwa-install-btn:hover { background: var(--accl); }
+.pwa-dismiss {
+  background: none; border: none; color: var(--mut);
+  cursor: pointer; font-size: .9rem; padding: .25rem;
+  transition: color var(--dur);
+}
+.pwa-dismiss:hover { color: var(--sand); }

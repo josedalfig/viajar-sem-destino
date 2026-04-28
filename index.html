@@ -4,6 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   <title>Viajar sem Destino</title>
+  <meta name="description" content="Descubra destinos dentro do seu budget. Informe datas, pessoas e orçamento."/>
+  <meta name="theme-color" content="#c9622f"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="VsD"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <link rel="apple-touch-icon" href="/icons/icon-192.png"/>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -34,27 +42,27 @@
   <!-- ── Header ── -->
   <header>
     <div class="logo">
-      <span class="logo-main">Viajar sem Destino</span>
-      <span class="logo-sub">O melhor destino está aqui</span>
+      <span class="logo-main">Viajar sem Destino <span class="logo-sub-inline">— O melhor destino está aqui</span></span>
     </div>
     <nav>
-      <a href="#">Como funciona</a>
-      <a href="#">Destinos</a>
-      <a href="#" class="nav-cta">Entrar</a>
+      <a href="#" data-i18n="nav.how">Como funciona</a>
+      <a href="#" data-i18n="nav.destinations">Destinos</a>
+      <a href="#" class="nav-cta" data-i18n="nav.enter">Entrar</a>
     </nav>
   </header>
 
   <!-- ── Hero ── -->
   <div class="hero">
-    <div class="eyebrow">Descubra onde ir</div>
+    <div class="r-eyebrow-bar" id="discBar" style="display:none">Suas descobertas</div>
+    <div class="eyebrow" data-i18n="hero.eyebrow">Descubra onde ir</div>
     <h1>Você decide quando.<br><em>A gente descobre onde.</em></h1>
-    <p class="subtitle">Informe seu budget, datas e quantas pessoas viajam.</p>
+    <p class="subtitle" data-i18n="hero.subtitle">Informe seu budget, datas e quantas pessoas viajam.</p>
 
     <div class="progress">
       <div class="dot active" id="dot1"></div>
       <div class="dot" id="dot2"></div>
-      <div class="dot" id="dot3"></div>
     </div>
+    <div class="results-eyebrow" data-i18n="results.eyebrow">Descobertas para você</div>
 
     <!-- ════════════════════════════════════════
          PASSO 1 — Formulário de busca
@@ -63,44 +71,45 @@
       <!-- Row 1: Origem + Viajantes -->
       <div class="s1-r1">
         <div class="field">
-          <label class="lbl">Saindo de</label>
+          <label class="lbl" data-i18n="step1.origin">Saindo de</label>
           <div class="ac-wrap" id="acWrap">
-            <input type="text" id="origem" placeholder="Cidade ou sigla (ex: GRU)" autocomplete="off"/>
+            <input type="text" id="origem" placeholder="Cidade ou sigla (ex: GRU)" data-i18n-ph="step1.origin.ph" autocomplete="off"/>
             <button class="geo-btn" id="geoBtn" title="Usar minha localização">📍</button>
             <div class="ac-drop" id="acDrop" style="display:none"></div>
           </div>
           <div class="geo-hint" id="geoHint" style="display:none"></div>
         </div>
         <div class="field">
-          <label class="lbl">Pessoas</label>
+          <label class="lbl" data-i18n="step1.people">Pessoas</label>
           <input type="number" id="pessoas" min="1" max="20" value="2" style="text-align:center"/>
         </div>
       </div>
 
       <!-- Row 2: Datas -->
       <div style="margin-bottom:12px">
-        <label class="lbl">Datas</label>
+        <label class="lbl" data-i18n="step1.dates">Datas</label>
         <div class="date-fields" id="dateFields">
           <div class="df-half" id="dfIda">
-            <span class="df-lbl">Ida</span>
+            <span class="df-lbl" data-i18n="step1.ida">Ida</span>
             <span class="df-val placeholder" id="dfIdaVal">Selecione</span>
           </div>
           <div class="df-half" id="dfVolta">
-            <span class="df-lbl">Volta</span>
-            <span class="df-val placeholder" id="dfVoltaVal">Opcional</span>
+            <span class="df-lbl" data-i18n="step1.volta">Volta</span>
+            <span class="df-val placeholder" id="dfVoltaVal" data-i18n="step1.optional">Opcional</span>
             <button class="df-clear" id="dfClear" title="Remover volta">✕</button>
           </div>
         </div>
         <label class="ow-label" style="margin-top:7px">
           <input type="checkbox" id="soIda"/>
-          Somente ida — sem data de retorno
+          <span data-i18n="step1.oneway">Somente ida — sem data de retorno</span>
         </label>
       </div>
 
       <!-- Row 3: Budget + Destino -->
+      <div style="margin-top:-.25rem"></div>
       <div class="s1-r3">
         <div class="field">
-          <label class="lbl">Budget total</label>
+          <label class="lbl" data-i18n="step1.budget">Budget total</label>
           <div class="brow">
             <select class="msel" id="moeda">
               <option value="BRL">R$</option>
@@ -111,18 +120,18 @@
           </div>
         </div>
         <div class="field">
-          <label class="lbl">Destino</label>
+          <label class="lbl" data-i18n="step1.dest">Destino</label>
           <select id="destType">
-            <option value="todos">Qualquer lugar</option>
-            <option value="nacional">Só Brasil</option>
-            <option value="internacional">Só internacional</option>
+            <option value="todos" data-i18n="step1.dest.any">Qualquer lugar</option>
+            <option value="nacional" data-i18n="step1.dest.nat">Só Brasil</option>
+            <option value="internacional" data-i18n="step1.dest.int">Só internacional</option>
           </select>
         </div>
       </div>
 
       <div class="cta-row">
-        <button class="btn-p" id="btnBuscar">Buscar destinos →</button>
-        <button class="btn-s" id="btnSurpresa">✦ Surpresa</button>
+        <button class="btn-p" id="btnBuscar" data-i18n="step1.search">Buscar destinos →</button>
+        <button class="btn-s" id="btnSurpresa" data-i18n="step1.surprise">✦ Surpresa</button>
       </div>
     </div><!-- /step1 -->
 
@@ -138,67 +147,71 @@
             <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
             <div class="r-meta" id="rMeta"></div>
           </div>
-          <button class="btn-nova-busca" id="btnNovaSearch">← Nova busca</button>
+          <button class="btn-nova-busca" id="btnNovaSearch" data-i18n="step2.newSearch">← Nova busca</button>
         </div>
         <div class="r-controls">
           <div class="r-ctrl-group">
             <label class="sort-lbl">Ordenar por</label>
             <select class="sort-sel" id="sortSel">
-              <option value="preco-asc">↑ Menor preço</option>
-              <option value="preco-desc">↓ Maior preço</option>
-              <option value="sugestao">✦ Nossa sugestão</option>
-              <option value="az">A → Z</option>
+              <option value="preco-asc" data-i18n="step2.priceAsc">↑ Menor preço</option>
+              <option value="preco-desc" data-i18n="step2.priceDesc">↓ Maior preço</option>
+              <option value="sugestao" data-i18n="step2.suggest">✦ Nossa sugestão</option>
+              <option value="az" data-i18n="step2.az">A → Z</option>
             </select>
           </div>
           <div class="r-ctrl-divider"></div>
           <div class="r-ctrl-group">
-            <button class="vb active" id="vbL">☰ Lista</button>
-            <button class="vb" id="vbM">🗺 Mapa</button>
+            <button class="vb active" id="vbL" data-i18n="step2.list">☰ Lista</button>
+            <button class="vb" id="vbM" data-i18n="step2.map">🗺 Mapa</button>
           </div>
         </div>
       </div>
 
       <!-- Filter bar: Row 1 = Clima + Cia Aérea | Row 2 = Tipo de Viagem -->
       <div class="fbar">
-        <div class="fbar-group">
-          <div class="fbar-label">Clima <span style="font-size:.52rem;opacity:.55">(um)</span></div>
-          <div class="chips" id="climaChips">
-            <div class="chip" data-group="clima" data-val="calor">☀️ Calor</div>
-            <div class="chip" data-group="clima" data-val="frio">❄️ Frio</div>
-            <div class="chip" data-group="clima" data-val="praia">🏖️ Praia</div>
-            <div class="chip" data-group="clima" data-val="montanha">⛰️ Serra</div>
-            <div class="chip" data-group="clima" data-val="temperado">🍂 Temp.</div>
+        <!-- Row 1: Clima | sep | Cia Aérea + voo combinado -->
+        <div class="fbar-row1">
+          <div class="fbar-group">
+            <div class="fbar-label">Clima <span class="fbar-hint">(um)</span></div>
+            <div class="chips" id="climaChips">
+              <div class="chip" data-group="clima" data-val="calor" data-i18n="clima.calor">☀️ Calor</div>
+              <div class="chip" data-group="clima" data-val="frio" data-i18n="clima.frio">❄️ Frio</div>
+              <div class="chip" data-group="clima" data-val="praia" data-i18n="clima.praia">🏖️ Praia</div>
+              <div class="chip" data-group="clima" data-val="montanha" data-i18n="clima.montanha">⛰️ Serra</div>
+              <div class="chip" data-group="clima" data-val="temperado" data-i18n="clima.temperado">🍂 Temp.</div>
+            </div>
           </div>
-        </div>
-        <div class="fbar-sep"></div>
-        <div class="fbar-group fbar-cia">
-          <div class="fbar-label">Cia Aérea</div>
-          <div class="cia-line">
-            <select class="cia-sel" id="ciaP">
-              <option value="">Qualquer</option>
-              <option value="Latam">LATAM</option>
-              <option value="Gol">GOL</option>
-              <option value="Azul">Azul</option>
-              <option value="TAP">TAP</option>
-              <option value="American">American</option>
-              <option value="Avianca">Avianca</option>
-              <option value="Copa Airlines">Copa</option>
-            </select>
-            <label class="ckl"><input type="checkbox" id="mesmaCia"/> Voo combinado</label>
+          <div class="fbar-vsep"></div>
+          <div class="fbar-group">
+            <div class="fbar-label">Cia Aérea</div>
+            <div class="fbar-cia-inline">
+              <select class="cia-sel" id="ciaP">
+                <option value="">Qualquer</option>
+                <option value="Latam">LATAM</option>
+                <option value="Gol">GOL</option>
+                <option value="Azul">Azul</option>
+                <option value="TAP">TAP</option>
+                <option value="American">American</option>
+                <option value="Avianca">Avianca</option>
+                <option value="Copa Airlines">Copa</option>
+              </select>
+              <label class="ckl"><input type="checkbox" id="mesmaCia"/> Voo combinado</label>
+            </div>
           </div>
+          <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar</button>
         </div>
+        <!-- Row 2: Tipo de viagem -->
         <div class="fbar-group fbar-tipo">
-          <div class="fbar-label">Tipo de viagem <span style="font-size:.52rem;opacity:.55">(múltiplo)</span></div>
+          <div class="fbar-label">Tipo de viagem <span class="fbar-hint">(múltiplo)</span></div>
           <div class="chips" id="tipoChips">
-            <div class="chip" data-group="tipo" data-val="gastronomia">🍽️ Gastronomia</div>
-            <div class="chip" data-group="tipo" data-val="cultura">🏛️ Cultura</div>
-            <div class="chip" data-group="tipo" data-val="aventura">🧗 Aventura</div>
-            <div class="chip" data-group="tipo" data-val="relaxar">🧘 Relaxar</div>
-            <div class="chip" data-group="tipo" data-val="familia">👨‍👩‍👧 Família</div>
-            <div class="chip" data-group="tipo" data-val="romantica">💑 Romântica</div>
+            <div class="chip" data-group="tipo" data-val="gastronomia" data-i18n="tipo.gastro">🍽️ Gastronomia</div>
+            <div class="chip" data-group="tipo" data-val="cultura" data-i18n="tipo.cultura">🏛️ Cultura</div>
+            <div class="chip" data-group="tipo" data-val="aventura" data-i18n="tipo.aventura">🧗 Aventura</div>
+            <div class="chip" data-group="tipo" data-val="relaxar" data-i18n="tipo.relaxar">🧘 Relaxar</div>
+            <div class="chip" data-group="tipo" data-val="familia" data-i18n="tipo.familia">👨‍👩‍👧 Família</div>
+            <div class="chip" data-group="tipo" data-val="romantica" data-i18n="tipo.romantica">💑 Romântica</div>
           </div>
         </div>
-        <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar filtros</button>
       </div>
 
       <div id="detP"></div>
@@ -206,7 +219,7 @@
       <div class="dgrid" id="dgrid"></div>
 
       <div class="cta-row" style="margin-top:4px">
-        <button class="btn-o" id="btnShare">📤 Compartilhar</button>
+        <button class="btn-o" id="btnShare" data-i18n="share.btn">📤 Compartilhar</button>
       </div>
     </div><!-- /step2 -->
 
@@ -214,9 +227,9 @@
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat"><div class="sn">180+</div><div class="sl2">Destinos</div></div>
-    <div class="stat"><div class="sn">50+</div><div class="sl2">Companhias</div></div>
-    <div class="stat"><div class="sn">100%</div><div class="sl2">Rotas reais</div></div>
+    <div class="stat"><div class="sn">180+</div><div class="sl2" data-i18n="stats.dest">Destinos</div></div>
+    <div class="stat"><div class="sn">50+</div><div class="sl2" data-i18n="stats.cias">Companhias</div></div>
+    <div class="stat"><div class="sn">100%</div><div class="sl2" data-i18n="stats.routes">Rotas reais</div></div>
   </div>
 
 </div><!-- /page -->
@@ -239,7 +252,7 @@
 <div class="share-modal" id="shareModal">
   <div class="share-box">
     <button class="share-close" id="shareModalClose">✕</button>
-    <div class="share-title">Compartilhar pesquisa</div>
+    <div class="share-title" data-i18n="share.title">Compartilhar pesquisa</div>
     <div class="share-sub">
       Envie sua busca — o link abrirá com todos os dados já preenchidos.<br>
       ⚠️ Preços sujeitos a alteração pelas companhias aéreas.
@@ -262,7 +275,7 @@
     </div>
     <div class="share-url-row">
       <input type="text" id="shareURLInput" readonly placeholder="Link da pesquisa"/>
-      <button id="shareCopyBtn">Copiar link</button>
+      <button id="shareCopyBtn" data-i18n="share.copy">Copiar link</button>
     </div>
     <div class="share-disclaimer">
       Os preços exibidos são estimativas baseadas em rotas reais e podem variar.
@@ -275,11 +288,28 @@
      JavaScript — data, modules, app
 ════════════════════════════════════════ -->
 
+<!-- Language selector -->
+<div class="lang-bar" id="langBar">
+  <button class="lang-btn active" data-lang="pt" onclick="I18n.setLang('pt')">🇧🇷 PT</button>
+  <button class="lang-btn" data-lang="en" onclick="I18n.setLang('en')">🇺🇸 EN</button>
+  <button class="lang-btn" data-lang="es" onclick="I18n.setLang('es')">🇪🇸 ES</button>
+</div>
+
+<!-- PWA install prompt -->
+<div class="pwa-banner" id="pwaBanner" style="display:none">
+  <span data-i18n="pwa.install">📲 Instalar app</span>
+  <button class="pwa-install-btn" id="pwaInstallBtn" data-i18n="pwa.install">📲 Instalar app</button>
+  <button class="pwa-dismiss" onclick="document.getElementById('pwaBanner').style.display='none'">✕</button>
+</div>
+
 <!-- Data -->
 <script src="js/state.js"></script>
 <script src="js/data/airports.js"></script>
 <script src="js/data/destinations.js"></script>
 <script src="js/data/coordinates.js"></script>
+
+<!-- i18n must load before everything -->
+<script src="js/modules/i18n.js"></script>
 
 <!-- Modules (order matters — dependencies first) -->
 <script src="js/modules/currency.js"></script>
@@ -317,5 +347,45 @@
 <!-- App orchestrator (must be last) -->
 <script src="js/app.js"></script>
 
+<script>
+// ── Service Worker registration ──
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(r => console.info('[SW] Registered:', r.scope))
+      .catch(e => console.warn('[SW] Failed:', e));
+  });
+}
+
+// ── PWA install prompt ──
+let _deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredPrompt = e;
+  document.getElementById('pwaBanner').style.display = 'flex';
+});
+document.getElementById('pwaInstallBtn').addEventListener('click', () => {
+  if (!_deferredPrompt) return;
+  _deferredPrompt.prompt();
+  _deferredPrompt.userChoice.then(() => {
+    _deferredPrompt = null;
+    document.getElementById('pwaBanner').style.display = 'none';
+  });
+});
+window.addEventListener('appinstalled', () => {
+  document.getElementById('pwaBanner').style.display = 'none';
+});
+
+// ── i18n: highlight active lang button ──
+document.addEventListener('langchange', e => {
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === e.detail.lang);
+  });
+  // Re-render sort select options
+  document.querySelectorAll('#sortSel option[data-i18n]').forEach(opt => {
+    opt.textContent = I18n.t(opt.dataset.i18n);
+  });
+});
+</script>
 </body>
 </html>

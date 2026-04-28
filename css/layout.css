@@ -24,6 +24,11 @@ header {
   font-size: var(--tx-xs); letter-spacing: .22em;
   text-transform: uppercase; color: var(--accl);
 }
+.logo-sub-inline {
+  font-size: var(--tx-xs); letter-spacing: .15em;
+  text-transform: uppercase; color: var(--accl);
+  font-family: "DM Sans", sans-serif; font-weight: 400;
+}
 nav { display: flex; gap: var(--sp-4); align-items: center; }
 nav a {
   font-size: var(--tx-sm); letter-spacing: .12em;
@@ -63,7 +68,7 @@ h1 {
 h1 em { font-style: italic; color: var(--accl); display: block; }
 .subtitle {
   font-size: var(--tx-base); color: var(--mut); font-weight: 300;
-  max-width: min(380px, 90vw); line-height: 1.7;
+  max-width: min(520px, 90vw); line-height: 1.7;
   margin: var(--sp-3) auto var(--sp-5);
   animation: fadeUp .8s .22s var(--ease) both;
 }
@@ -126,4 +131,21 @@ h1 em { font-style: italic; color: var(--accl); display: block; }
 /* sm: 480–767 */
 @media (max-width: 767px) {
   nav { display: none; }
+}
+
+/* ── Results mode: hide hero text, show compact eyebrow ── */
+.hero.results-mode .eyebrow,
+.hero.results-mode h1,
+.hero.results-mode .subtitle,
+.hero.results-mode .progress { display: none; }
+.hero.results-mode .results-eyebrow { display: flex; }
+.results-eyebrow {
+  display: none;
+  font-size: var(--tx-xs); letter-spacing: .28em; text-transform: uppercase;
+  color: var(--accl); margin-bottom: var(--sp-3); font-weight: 500;
+  align-items: center; gap: 10px;
+}
+.results-eyebrow::before, .results-eyebrow::after {
+  content: ''; flex: 1; height: 1px; background: var(--accl); opacity: .4;
+  max-width: 60px;
 }

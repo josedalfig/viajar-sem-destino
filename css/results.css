@@ -1,6 +1,19 @@
 /* css/results.css — Resultados: filtros, cards, detalhe, mapa, clima
    ─────────────────────────────────────────────────────────────────── */
 
+/* ── Discoveries eyebrow (replaces hero when results show) ── */
+.r-eyebrow-bar {
+  text-align: center;
+  font-size: var(--tx-xs); letter-spacing: .28em;
+  text-transform: uppercase; color: var(--accl);
+  margin-bottom: var(--sp-4);
+  display: flex; align-items: center; justify-content: center; gap: .625rem;
+}
+.r-eyebrow-bar::before, .r-eyebrow-bar::after {
+  content: ''; flex: 1; max-width: 60px;
+  height: 1px; background: var(--accl); opacity: .4;
+}
+
 /* ── Top bar ── */
 .r-topbar { margin-bottom: 1.25rem; }
 
@@ -30,7 +43,7 @@
 /* Controls row: sort dropdown + view toggle */
 .r-controls {
   display: flex; align-items: center;
-  gap: .5rem; flex-wrap: wrap;
+  gap: .375rem; flex-wrap: wrap;
 }
 .r-ctrl-group { display: flex; align-items: center; gap: .375rem; }
 .r-ctrl-divider { width: 1px; height: 18px; background: rgba(255,255,255,.12); margin: 0 .125rem; }
@@ -57,39 +70,45 @@
 }
 .vb.active, .vb:hover { border-color: var(--acc); color: var(--sand); background: rgba(201,98,47,.12); }
 
-/* ── Filter bar — 2 row grid: [clima | cia] / [tipo] ── */
+/* ── Filter bar — 2 rows ── */
 .fbar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;  /* clima | divider | cia */
-  grid-template-rows: auto auto;
-  gap: .5rem .75rem;
+  display: flex; flex-direction: column; gap: .5rem;
   padding: .75rem 1rem;
   background: rgba(255,255,255,.03);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: var(--radius-md);
   margin-bottom: 1rem;
-  align-items: start;
 }
-.fbar-group  { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
-.fbar-tipo   { grid-column: 1 / -1; }
-.fbar-clear  { grid-column: 1 / -1; justify-self: end; margin: 0;
-  padding: .25rem .625rem; border-radius: 18px; font-size: var(--tx-xs);
-  cursor: pointer; border: 1px solid rgba(255,255,255,.09);
-  background: transparent; color: var(--mut);
-  font-family: 'DM Sans', sans-serif; height: 26px;
-  transition: all var(--dur) var(--ease); white-space: nowrap;
+.fbar-row1 {
+  display: flex; align-items: flex-start; gap: 0; flex-wrap: wrap;
 }
-.fbar-clear:hover { border-color: var(--acc); color: var(--sand); }
+.fbar-row1 .fbar-group:first-child { flex: 1; min-width: 0; }
+.fbar-row1 .fbar-group:last-child  { flex: 0 0 auto; min-width: 160px; }
+.fbar-vsep {
+  width: 1px; height: 36px; background: rgba(255,255,255,.1);
+  margin: 0 .625rem; flex-shrink: 0; align-self: center;
+}
+.fbar-cia-inline {
+  display: flex; align-items: center; gap: .625rem; flex-wrap: wrap;
+}
+.fbar-group  { display: flex; flex-direction: column; gap: .3rem; min-width: 0; flex: 1; }
+.fbar-tipo   { flex: none; width: 100%; }
+.fbar-hint   { font-size: .55rem; opacity: .55; }
 .fbar-label  {
   font-size: var(--tx-xs); letter-spacing: .12em;
   text-transform: uppercase; color: var(--mut); font-weight: 500;
 }
-.fbar-sep    {
-  width: 1px; background: rgba(255,255,255,.1);
-  align-self: stretch; margin: 0 .25rem;
-  grid-row: 1;
-}
+.fbar-sep    { display: none; }
 .fbar-cia    { min-width: 0; }
+.fbar-clear  {
+  margin-left: auto; flex-shrink: 0;
+  padding: .25rem .625rem; border-radius: 18px; font-size: var(--tx-xs);
+  cursor: pointer; border: 1px solid rgba(255,255,255,.09);
+  background: transparent; color: var(--mut);
+  font-family: 'DM Sans', sans-serif; align-self: center;
+  transition: all var(--dur) var(--ease); white-space: nowrap;
+}
+.fbar-clear:hover { border-color: var(--acc); color: var(--sand); }
 
 /* Notice — hidden now, kept for potential future use */
 .notice { display: none; }
@@ -157,11 +176,20 @@
   margin-bottom: 1.125rem;
   animation: fadeUp .3s var(--ease) both;
 }
-.dp-head     { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .625rem; gap: .5rem; }
-.dp-city-row { display: flex; align-items: baseline; gap: .4rem; flex-wrap: wrap; }
-.dp-city     { font-family: 'Playfair Display', serif; font-size: var(--tx-xl); font-weight: 700; line-height:1.1; }
-.dp-ctry     { font-size: var(--tx-xs); color: var(--mut); opacity: .8; }
-.dp-rating   { font-size: var(--tx-xs); color: var(--mut); opacity: .8; }
+.dp-head      { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .625rem; gap: .5rem; }
+.dp-title-row { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.dp-city      { font-family: 'Playfair Display', serif; font-size: var(--tx-xl); font-weight: 700; line-height:1.1; }
+.dp-ctry      { font-size: var(--tx-xs); color: var(--mut); opacity: .8; }
+
+/* Airline logo in stat box */
+.airline-logo { height: 22px; width: auto; max-width: 70px; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; margin-top: .2rem; }
+.airline-name { font-size: var(--tx-sm); font-weight: 500; }
+
+/* Stats alignment */
+.dst-total  { text-align: left; }
+.dst-center { text-align: center; }
+.dst-center .dsl { text-align: center; }
+.dst-center .dsv { text-align: center; }
 .xbtn {
   background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
   border-radius: var(--radius-sm);
@@ -178,7 +206,7 @@
 /* Detail stats */
 .dp-stats {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
   gap: .4rem; margin-bottom: .875rem;
 }
 .dst {
@@ -187,12 +215,13 @@
   padding: .5rem .625rem;
   border: 1px solid rgba(255,255,255,.06);
 }
+.dst:not(:first-child) { text-align: center; }
 .dsl { font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mut); margin-bottom: .15rem; }
 .dsv { font-size: var(--tx-sm); font-weight: 500; }
 .dp-total-val { font-size: var(--tx-base) !important; color: var(--accl); font-weight: 700; }
 
 /* Flight rows */
-.ft-ttl { font-size: var(--tx-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--mut); margin-bottom: .5625rem; }
+.ft-ttl { font-size: var(--tx-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--mut); margin-bottom: .5rem; text-align: center; }
 .fr {
   display: flex; align-items: center; justify-content: space-between;
   padding: .5625rem .8125rem; border-radius: var(--radius-sm);
@@ -274,6 +303,8 @@
   .dp-stats       { grid-template-columns: 1fr 1fr; }
   .dp-cta         { flex-direction: column; }
   .r-topbar-head  { padding-right: 0; min-height: 3rem; }
+  .fbar-row1      { flex-wrap: wrap; }
+  .fbar-vsep      { display: none; }
   .r-controls     { flex-wrap: wrap; }
   .r-ctrl-divider { display: none; }
   .fbar           { grid-template-columns: 1fr; }

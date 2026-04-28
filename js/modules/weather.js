@@ -64,25 +64,26 @@ const Weather = (() => {
   // ── Build HTML ───────────────────────────────────────────────────
   function buildHTML(wx, travelDate) {
     if (!wx) {
-      return '<div class="wx-err">⚠️ Clima indisponível no momento</div>';
+      return '<div class="wx-err">' + I18n.t('wx.unavail') + '</div>';
     }
     if (wx.error) {
       if (wx.error.toLowerCase().includes('api key') || wx.error.includes('Invalid')) {
-        return '<div class="wx-err">🔑 Chave de clima em ativação (até 2h após cadastro)</div>';
+        return '<div class="wx-err">' + I18n.t('wx.keyact') + '</div>';
       }
       return '<div class="wx-err">⚠️ ' + wx.error + '</div>';
     }
 
+    const locale = I18n.getLang() === 'pt' ? 'pt-BR' : I18n.getLang() === 'es' ? 'es-ES' : 'en-US';
     const dateLabel = travelDate
-      ? 'Previsão · ' + travelDate.toLocaleDateString('pt-BR', { day:'2-digit', month:'short' })
-      : 'Próximos dias';
+      ? I18n.t('wx.forecast') + ' · ' + travelDate.toLocaleDateString(locale, { day:'2-digit', month:'short' })
+      : I18n.t('wx.forecast');
 
     return '<div class="wx-bar">'
       + '<div class="wx-card">'
         + '<div class="wx-icon">' + wx.current.icon + '</div>'
         + '<span class="wx-label">Agora&nbsp;</span>'
         + '<span class="wx-temp">' + wx.current.temp + '°C</span>'
-        + '<span class="wx-desc">' + wx.current.desc + ' · ' + wx.current.humidity + '% umidade</span>'
+        + '<span class="wx-desc">' + wx.current.desc + ' · ' + wx.current.humidity + '% ' + I18n.t('wx.humidity') + '</span>'
       + '</div>'
       + (wx.forecast
         ? '<div class="wx-card">'

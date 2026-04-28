@@ -25,6 +25,11 @@ const App = (() => {
   function goStep(n) {
     document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
     document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+    // Hide hero copy when showing results — show discovery bar instead
+    const heroEls = document.querySelectorAll('.eyebrow, h1, .subtitle, .progress');
+    const discBar = document.getElementById('discBar');
+    heroEls.forEach(el => el.style.display = n === 2 ? 'none' : '');
+    if (discBar) discBar.style.display = n === 2 ? 'flex' : 'none';
     _setDots(n);
 
     if (n === 1) {
@@ -190,6 +195,16 @@ const App = (() => {
     Autocomplete.init();
     Share.loadFromURL();
     Calendar.updateUI();
+    I18n.init();
+
+    // Re-render dynamic content on language change
+    document.addEventListener('langchange', () => {
+      const results = AppState.get('results');
+      if (results && results.length) {
+        Search.updateMeta();
+        Cards.render();
+      }
+    });
   }
 
   return { init, goStep, runSearch, startSearch, surpresa, clearFilters };
