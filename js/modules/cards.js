@@ -40,7 +40,7 @@ const Cards = (() => {
       const tags    = d.tags.map(t => '<span class="dc-tag">' + t + '</span>').join('');
 
       return '<div class="dc' + (isBest ? ' feat' : '') + (isSel ? ' dc-selected' : '') + '"'
-        + ' onclick="Cards.showDetail(' + origIdx + ')">'
+        + ' data-idx="' + origIdx + '">'
         + bg
         + '<div class="dc-inner">'
           + '<div>'
@@ -186,3 +186,12 @@ const Cards = (() => {
 
 // Expose to global scope for inline onclick handlers
 window.Cards = Cards;
+
+// Safety: if Cards.showDetail is called before modules are ready, queue it
+window._cardQueue = [];
+const _origShow = Cards.showDetail.bind(Cards);
+Cards.showDetail = function(idx) {
+  if (AppState && AppState.get('results') && AppState.get('results').length) {
+    _origShow(idx);
+  }
+};

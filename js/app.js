@@ -164,6 +164,12 @@ const App = (() => {
       if (document.getElementById('step2').style.display !== 'none') Cards.render();
     });
 
+    // Card click — event delegation (more reliable than inline onclick)
+    document.getElementById('dgrid').addEventListener('click', e => {
+      const card = e.target.closest('.dc[data-idx]');
+      if (card) Cards.showDetail(parseInt(card.dataset.idx));
+    });
+
     // Sort dropdown
     document.getElementById('sortSel').addEventListener('change', e => {
       Search.setSort(e.target.value);
