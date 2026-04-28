@@ -212,3 +212,6 @@ const App = (() => {
 
 // Bootstrap on DOM ready
 document.addEventListener('DOMContentLoaded', App.init);
+
+// Expose to global scope
+window.App = App;

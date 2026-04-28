@@ -55,3 +55,6 @@ const Currency = (() => {
 
   return { format, formatBudgetInput, onCurrencyChange, getBudgetBRL, parseBudgetInput };
 })();
+
+// Expose to global scope
+window.Currency = Currency;

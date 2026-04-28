@@ -161,14 +161,16 @@
 }
 
 /* ── Language selector ── */
+.lang-footer {
+  display: flex; justify-content: center;
+  padding: 1.5rem 0 2rem;
+  position: relative; z-index: 1;
+}
 .lang-bar {
-  position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
-  z-index: 999;
   display: flex; gap: .375rem; align-items: center;
-  background: rgba(13,17,23,.85); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.1); border-radius: 40px;
   padding: .3rem .5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,.4);
 }
 .lang-btn {
   padding: .3rem .75rem; border-radius: 40px;
@@ -183,7 +185,7 @@
 
 /* ── PWA install banner ── */
 .pwa-banner {
-  position: fixed; bottom: 4rem; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
   z-index: 998;
   display: flex; align-items: center; gap: .75rem;
   background: rgba(13,17,23,.92); backdrop-filter: blur(12px);

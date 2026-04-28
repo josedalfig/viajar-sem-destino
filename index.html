@@ -55,7 +55,7 @@
   <div class="hero">
     <div class="r-eyebrow-bar" id="discBar" style="display:none">Suas descobertas</div>
     <div class="eyebrow" data-i18n="hero.eyebrow">Descubra onde ir</div>
-    <h1>Você decide quando.<br><em>A gente descobre onde.</em></h1>
+    <h1><span data-i18n="hero.h1">Você decide quando.</span><br><em data-i18n="hero.h1.em">A gente descobre onde.</em></h1>
     <p class="subtitle" data-i18n="hero.subtitle">Informe seu budget, datas e quantas pessoas viajam.</p>
 
     <div class="progress">
@@ -91,7 +91,7 @@
         <div class="date-fields" id="dateFields">
           <div class="df-half" id="dfIda">
             <span class="df-lbl" data-i18n="step1.ida">Ida</span>
-            <span class="df-val placeholder" id="dfIdaVal">Selecione</span>
+            <span class="df-val placeholder" id="dfIdaVal" data-i18n="step1.select">Selecione</span>
           </div>
           <div class="df-half" id="dfVolta">
             <span class="df-lbl" data-i18n="step1.volta">Volta</span>
@@ -151,7 +151,7 @@
         </div>
         <div class="r-controls">
           <div class="r-ctrl-group">
-            <label class="sort-lbl">Ordenar por</label>
+            <label class="sort-lbl" data-i18n="step2.orderBy">Ordenar por</label>
             <select class="sort-sel" id="sortSel">
               <option value="preco-asc" data-i18n="step2.priceAsc">↑ Menor preço</option>
               <option value="preco-desc" data-i18n="step2.priceDesc">↓ Maior preço</option>
@@ -172,7 +172,7 @@
         <!-- Row 1: Clima | sep | Cia Aérea + voo combinado -->
         <div class="fbar-row1">
           <div class="fbar-group">
-            <div class="fbar-label">Clima <span class="fbar-hint">(um)</span></div>
+            <div class="fbar-label"><span data-i18n="filter.climate">Clima</span> <span class="fbar-hint" data-i18n="filter.one">(um)</span></div>
             <div class="chips" id="climaChips">
               <div class="chip" data-group="clima" data-val="calor" data-i18n="clima.calor">☀️ Calor</div>
               <div class="chip" data-group="clima" data-val="frio" data-i18n="clima.frio">❄️ Frio</div>
@@ -183,7 +183,7 @@
           </div>
           <div class="fbar-vsep"></div>
           <div class="fbar-group">
-            <div class="fbar-label">Cia Aérea</div>
+            <div class="fbar-label" data-i18n="filter.airline">Cia Aérea</div>
             <div class="fbar-cia-inline">
               <select class="cia-sel" id="ciaP">
                 <option value="">Qualquer</option>
@@ -195,14 +195,14 @@
                 <option value="Avianca">Avianca</option>
                 <option value="Copa Airlines">Copa</option>
               </select>
-              <label class="ckl"><input type="checkbox" id="mesmaCia"/> Voo combinado</label>
+              <label class="ckl"><input type="checkbox" id="mesmaCia"/> <span data-i18n="filter.combo">Voo combinado</span></label>
             </div>
           </div>
           <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar</button>
         </div>
         <!-- Row 2: Tipo de viagem -->
         <div class="fbar-group fbar-tipo">
-          <div class="fbar-label">Tipo de viagem <span class="fbar-hint">(múltiplo)</span></div>
+          <div class="fbar-label"><span data-i18n="filter.tipo">Tipo de viagem</span> <span class="fbar-hint" data-i18n="filter.multi">(múltiplo)</span></div>
           <div class="chips" id="tipoChips">
             <div class="chip" data-group="tipo" data-val="gastronomia" data-i18n="tipo.gastro">🍽️ Gastronomia</div>
             <div class="chip" data-group="tipo" data-val="cultura" data-i18n="tipo.cultura">🏛️ Cultura</div>
@@ -230,6 +230,15 @@
     <div class="stat"><div class="sn">180+</div><div class="sl2" data-i18n="stats.dest">Destinos</div></div>
     <div class="stat"><div class="sn">50+</div><div class="sl2" data-i18n="stats.cias">Companhias</div></div>
     <div class="stat"><div class="sn">100%</div><div class="sl2" data-i18n="stats.routes">Rotas reais</div></div>
+  </div>
+
+  <!-- Language selector — inside page flow -->
+  <div class="lang-footer">
+    <div class="lang-bar" id="langBar">
+      <button class="lang-btn active" data-lang="pt" onclick="I18n.setLang('pt')">🇧🇷 PT</button>
+      <button class="lang-btn" data-lang="en" onclick="I18n.setLang('en')">🇺🇸 EN</button>
+      <button class="lang-btn" data-lang="es" onclick="I18n.setLang('es')">🇪🇸 ES</button>
+    </div>
   </div>
 
 </div><!-- /page -->
@@ -288,12 +297,7 @@
      JavaScript — data, modules, app
 ════════════════════════════════════════ -->
 
-<!-- Language selector -->
-<div class="lang-bar" id="langBar">
-  <button class="lang-btn active" data-lang="pt" onclick="I18n.setLang('pt')">🇧🇷 PT</button>
-  <button class="lang-btn" data-lang="en" onclick="I18n.setLang('en')">🇺🇸 EN</button>
-  <button class="lang-btn" data-lang="es" onclick="I18n.setLang('es')">🇪🇸 ES</button>
-</div>
+<!-- lang-bar moved to page footer -->
 
 <!-- PWA install prompt -->
 <div class="pwa-banner" id="pwaBanner" style="display:none">

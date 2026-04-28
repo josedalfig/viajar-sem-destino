@@ -122,3 +122,6 @@ const MapView = (() => {
 
   return { setView, selectFromMap, reset };
 })();
+
+// Expose to global scope
+window.MapView = MapView;

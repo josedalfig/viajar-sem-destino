@@ -183,3 +183,6 @@ const Cards = (() => {
 
   return { render, showDetail, closeDetail, goBook };
 })();
+
+// Expose to global scope for inline onclick handlers
+window.Cards = Cards;

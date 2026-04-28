@@ -136,6 +136,8 @@ const I18n = (() => {
       // PWA install
       'pwa.install':    '📲 Instalar app',
       'pwa.installed':  'App instalado!',
+      'step2.orderBy': 'Ordenar por',
+      'step1.select': 'Selecione',
     },
 
     en: {
@@ -239,6 +241,8 @@ const I18n = (() => {
       'results.eyebrow':'Discoveries for you',
       'pwa.install':    '📲 Install app',
       'pwa.installed':  'App installed!',
+      'step2.orderBy': 'Sort by',
+      'step1.select': 'Select',
     },
 
     es: {
@@ -342,6 +346,8 @@ const I18n = (() => {
       'results.eyebrow':'Descubrimientos para ti',
       'pwa.install':    '📲 Instalar app',
       'pwa.installed':  '¡App instalada!',
+      'step2.orderBy': 'Ordenar por',
+      'step1.select': 'Seleccionar',
     },
   };
 
@@ -393,3 +399,6 @@ const I18n = (() => {
 
   return { t, setLang, getLang, init, applyAll };
 })();
+
+// Expose to global scope
+window.I18n = I18n;

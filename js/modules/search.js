@@ -136,3 +136,6 @@ const Search = (() => {
 
   return { run, setSort, clearFilters, updateMeta };
 })();
+
+// Expose to global scope
+window.Search = Search;

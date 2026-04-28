@@ -193,3 +193,6 @@ const EmptyState = (() => {
 
   return { build, applyBudget, applyDates, applyDest };
 })();
+
+// Expose to global scope
+window.EmptyState = EmptyState;

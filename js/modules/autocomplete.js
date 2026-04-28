@@ -130,3 +130,6 @@ const Autocomplete = (() => {
 
   return { onInput, onKeyDown, select, detectLocation, init };
 })();
+
+// Expose to global scope
+window.Autocomplete = Autocomplete;

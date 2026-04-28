@@ -154,3 +154,6 @@ const Calendar = (() => {
   // Public API
   return { open, close, navigate, render, pickDay, updateUI, clearVolta, toggleOneway };
 })();
+
+// Expose to global scope
+window.Calendar = Calendar;

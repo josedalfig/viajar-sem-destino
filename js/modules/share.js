@@ -100,3 +100,6 @@ const Share = (() => {
 
   return { buildURL, open, close, copyURL, loadFromURL };
 })();
+
+// Expose to global scope
+window.Share = Share;
