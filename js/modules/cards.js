@@ -37,14 +37,14 @@ const Cards = (() => {
       const isBest  = i === 0 && selectedIdx === null;
       const isSel   = selectedIdx !== null && results[selectedIdx] === d;
       const bg      = d.img ? '<div class="dc-bg" style="background-image:url(\'' + d.img + '\')"></div>' : '';
-      const tags    = d.tags.map(t => '<span class="dc-tag">' + t + '</span>').join('');
+      const tags    = d.tags.map(t => '<span class="dc-tag">' + tTag(t) + '</span>').join('');
 
       return '<div class="dc' + (isBest ? ' feat' : '') + (isSel ? ' dc-selected' : '') + '"'
         + ' data-idx="' + origIdx + '">'
         + bg
         + '<div class="dc-inner">'
           + '<div>'
-            + '<div class="dc-badge"><span class="bdot"></span>' + (isBest ? '✦ Nossa sugestão' : d.tags[0]) + '</div>'
+            + '<div class="dc-badge"><span class="bdot"></span>' + (isBest ? I18n.t('nossa.sug') : tTag(d.tags[0])) + '</div>'
             + '<div class="dc-city">' + d.city + '</div>'
             + '<div class="dc-country">' + d.country + '</div>'
           + '</div>'

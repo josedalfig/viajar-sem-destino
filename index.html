@@ -144,7 +144,7 @@
       <div class="r-topbar">
         <div class="r-topbar-head">
           <div class="r-head">
-            <div class="r-title">Encontramos <span id="numR">0</span> destinos</div>
+            <div class="r-title"><span data-i18n="found.pre">Encontramos</span> <span id="numR">0</span> <span data-i18n="found.post">destinos</span></div>
             <div class="r-meta" id="rMeta"></div>
           </div>
           <button class="btn-nova-busca" id="btnNovaSearch" data-i18n="step2.newSearch">← Nova busca</button>
@@ -195,7 +195,7 @@
                 <option value="Avianca">Avianca</option>
                 <option value="Copa Airlines">Copa</option>
               </select>
-              <label class="ckl"><input type="checkbox" id="mesmaCia"/> <span data-i18n="filter.combo">Voo combinado</span></label>
+              <label class="ckl" style="white-space:nowrap"><input type="checkbox" id="mesmaCia"/> <span data-i18n="filter.combo">Voo combinado</span></label>
             </div>
           </div>
           <button class="fbar-clear" id="fbarClear" style="display:none">✕ Limpar</button>
@@ -301,9 +301,8 @@
 
 <!-- PWA install prompt -->
 <div class="pwa-banner" id="pwaBanner" style="display:none">
-  <span data-i18n="pwa.install">📲 Instalar app</span>
   <button class="pwa-install-btn" id="pwaInstallBtn" data-i18n="pwa.install">📲 Instalar app</button>
-  <button class="pwa-dismiss" onclick="document.getElementById('pwaBanner').style.display='none'">✕</button>
+  <button class="pwa-dismiss" id="pwaDismiss" data-i18n="pwa.dismiss">✕</button>
 </div>
 
 <!-- Data -->

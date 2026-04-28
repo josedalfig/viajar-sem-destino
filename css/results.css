@@ -92,7 +92,7 @@
   margin: 0 .625rem; flex-shrink: 0; align-self: center;
 }
 .fbar-cia-inline {
-  display: flex; align-items: center; gap: .5rem; flex-wrap: nowrap;
+  display: flex; align-items: center; gap: .4rem; flex-wrap: nowrap; overflow: hidden;
 }
 .fbar-group  { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
 .fbar-tipo   { width: 100%; }

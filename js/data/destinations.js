@@ -14,7 +14,7 @@ const DESTS = {
       desc: 'Ilha da Magia — 42 praias, lagoas cristalinas e o melhor da vida litorânea.',
       rating: 4.8,
       times: ['06:10→07:20','11:30→12:40','17:50→19:00'],
-      img: '/img/florianopolis.jpg',
+      img: 'https://images.unsplash.com/photo-1564189410869-4a7747fcb81f?w=800&q=80&fit=crop',
     },
     {
       city: 'Rio de Janeiro', country: '🇧🇷 Brasil', iata: 'GIG',
@@ -24,7 +24,7 @@ const DESTS = {
       desc: 'Cristo Redentor, Copacabana e a energia única da Cidade Maravilhosa.',
       rating: 4.9,
       times: ['05:45→07:30','10:20→12:05','19:15→21:00'],
-      img: '/img/rio-de-janeiro.jpg',
+      img: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80&fit=crop',
     },
     {
       city: 'São Paulo', country: '🇧🇷 Brasil', iata: 'GRU',
@@ -34,7 +34,7 @@ const DESTS = {
       desc: 'Maior metrópole da América Latina e capital gastronômica do Brasil.',
       rating: 4.5,
       times: ['06:00→07:10','12:30→13:40','20:00→21:10'],
-      img: '/img/sao-paulo.jpg',
+      img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop',
     },
     {
       city: 'Fortaleza', country: '🇧🇷 Brasil', iata: 'FOR',
@@ -44,7 +44,7 @@ const DESTS = {
       desc: 'Dunas douradas, lagoas de água morna e o melhor litoral nordestino.',
       rating: 4.7,
       times: ['05:30→08:15','14:00→16:45'],
-      img: '/img/fortaleza.jpg',
+      img: 'https://images.unsplash.com/photo-1590577976322-3d2d6a2130f7?w=800&q=80&fit=crop',
     },
     {
       city: 'Foz do Iguaçu', country: '🇧🇷 Brasil', iata: 'IGU',
@@ -54,7 +54,7 @@ const DESTS = {
       desc: 'Cataratas do Iguaçu — uma das 7 maravilhas naturais do mundo.',
       rating: 4.9,
       times: ['07:20→09:00','16:30→18:10'],
-      img: '/img/foz-do-iguacu.jpg',
+      img: 'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=800&q=80&fit=crop',
     },
     {
       city: 'Salvador', country: '🇧🇷 Brasil', iata: 'SSA',
@@ -64,7 +64,7 @@ const DESTS = {
       desc: 'Pelourinho tombado pela UNESCO, axé e a culinária baiana mais autêntica.',
       rating: 4.8,
       times: ['06:30→09:00','18:20→20:50'],
-      img: '/img/salvador.jpg',
+      img: 'https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?w=800&q=80&fit=crop',
     },
     {
       city: 'Recife', country: '🇧🇷 Brasil', iata: 'REC',
@@ -74,7 +74,7 @@ const DESTS = {
       desc: 'Porto de Galinhas a 1h e o frevo vibrante do Nordeste.',
       rating: 4.7,
       times: ['06:00→08:40','19:30→22:10'],
-      img: '/img/recife.jpg',
+      img: 'https://images.unsplash.com/photo-1558612789-98394cf4c4af?w=800&q=80&fit=crop',
     },
     {
       city: 'Manaus', country: '🇧🇷 Brasil', iata: 'MAO',
@@ -84,7 +84,7 @@ const DESTS = {
       desc: 'Portal de entrada para a maior floresta tropical do planeta.',
       rating: 4.6,
       times: ['07:00→10:30','14:00→17:30'],
-      img: '/img/manaus.jpg',
+      img: 'https://images.unsplash.com/photo-1534108061832-a32f12cf5eef?w=800&q=80&fit=crop',
     },
   ],
 
@@ -97,7 +97,7 @@ const DESTS = {
       desc: 'A Paris da América do Sul — tango, bife perfeito e arquitetura europeia.',
       rating: 4.8,
       times: ['07:15→09:30','13:40→15:55','21:00→23:15'],
-      img: '/img/buenos-aires.jpg',
+      img: 'https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=800&q=80&fit=crop',
     },
     {
       city: 'Santiago', country: '🇨🇱 Chile', iata: 'SCL',
@@ -107,7 +107,7 @@ const DESTS = {
       desc: 'Metrópole moderna aos pés dos Andes — neve a 1h de distância.',
       rating: 4.6,
       times: ['06:30→08:20','15:00→16:50'],
-      img: '/img/santiago.jpg',
+      img: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=800&q=80&fit=crop',
     },
     {
       city: 'Montevidéu', country: '🇺🇾 Uruguai', iata: 'MVD',
@@ -117,7 +117,7 @@ const DESTS = {
       desc: 'Cidade tranquila com charme europeu às margens do Rio da Prata.',
       rating: 4.5,
       times: ['08:00→09:50','17:30→19:20'],
-      img: '/img/montevideu.jpg',
+      img: 'https://images.unsplash.com/photo-1581370760395-a8f4c4e07908?w=800&q=80&fit=crop',
     },
     {
       city: 'Cancún', country: '🇲🇽 México', iata: 'CUN',
@@ -127,7 +127,7 @@ const DESTS = {
       desc: 'Caribe mexicano turquesa com ruínas maias e resorts all-inclusive.',
       rating: 4.8,
       times: ['05:50→11:30','23:10→04:50'],
-      img: '/img/cancun.jpg',
+      img: 'https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=800&q=80&fit=crop',
     },
     {
       city: 'Miami', country: '🇺🇸 EUA', iata: 'MIA',
@@ -137,7 +137,7 @@ const DESTS = {
       desc: 'South Beach, art déco, compras em Sawgrass e a cena latina dos EUA.',
       rating: 4.7,
       times: ['06:20→10:45','14:30→19:00','22:00→02:30'],
-      img: '/img/miami.jpg',
+      img: 'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&q=80&fit=crop',
     },
     {
       city: 'Lisboa', country: '🇵🇹 Portugal', iata: 'LIS',
@@ -147,7 +147,7 @@ const DESTS = {
       desc: 'Pastéis de Belém, fado ao entardecer e o Tejo do alto do Castelo.',
       rating: 4.9,
       times: ['18:30→08:45+1','22:10→12:20+1'],
-      img: '/img/lisboa.jpg',
+      img: 'https://images.unsplash.com/photo-1558642891-54be180ea339?w=800&q=80&fit=crop',
     },
     {
       city: 'Roma', country: '🇮🇹 Itália', iata: 'FCO',
@@ -157,7 +157,7 @@ const DESTS = {
       desc: 'Coliseu, Vaticano, gelato e la dolce vita — história em cada esquina.',
       rating: 4.9,
       times: ['18:30→11:00+1','21:00→13:30+1'],
-      img: '/img/roma.jpg',
+      img: 'https://images.unsplash.com/photo-1552832230-c0197dd611b5?w=800&q=80&fit=crop',
     },
     {
       city: 'Barcelona', country: '🇪🇸 Espanha', iata: 'BCN',
@@ -167,7 +167,7 @@ const DESTS = {
       desc: 'Gaudí, Las Ramblas, praias mediterrâneas e a noite mais vibrante da Europa.',
       rating: 4.8,
       times: ['19:45→12:00+1','22:30→14:45+1'],
-      img: '/img/barcelona.jpg',
+      img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop',
     },
     {
       city: 'Bogotá', country: '🇨🇴 Colômbia', iata: 'BOG',
@@ -177,7 +177,7 @@ const DESTS = {
       desc: 'Capital vibrante a 2.600m de altitude com bairros coloridos e café excepcional.',
       rating: 4.5,
       times: ['06:50→10:00','16:20→19:30'],
-      img: '/img/bogota.jpg',
+      img: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=800&q=80&fit=crop',
     },
     {
       city: 'Cidade do Panamá', country: '🇵🇦 Panamá', iata: 'PTY',
@@ -187,7 +187,7 @@ const DESTS = {
       desc: 'Canal histórico, skyline surpreendente e hub para toda a América Central.',
       rating: 4.4,
       times: ['07:30→11:00','18:45→22:15'],
-      img: '/img/cidade-do-panama.jpg',
+      img: 'https://images.unsplash.com/photo-1591801258062-3a7ad1bb56ea?w=800&q=80&fit=crop',
     },
   ],
 };

@@ -186,6 +186,12 @@ const App = (() => {
     // New search button
     document.getElementById('btnNovaSearch').addEventListener('click', () => goStep(1));
 
+    // PWA dismiss
+    const pwaDismiss = document.getElementById('pwaDismiss');
+    if (pwaDismiss) pwaDismiss.addEventListener('click', () => {
+      document.getElementById('pwaBanner').style.display = 'none';
+    });
+
     // Share
     document.getElementById('btnShare').addEventListener('click', Share.open);
     document.getElementById('shareModalClose').addEventListener('click', Share.close);

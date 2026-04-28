@@ -185,16 +185,16 @@
 
 /* ── PWA install banner ── */
 .pwa-banner {
-  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 1rem; right: 1rem;
   z-index: 998;
-  display: flex; align-items: center; gap: .75rem;
-  background: rgba(13,17,23,.92); backdrop-filter: blur(12px);
+  display: flex; align-items: center; gap: .5rem;
+  background: rgba(13,17,23,.95); backdrop-filter: blur(12px);
   border: 1px solid rgba(201,98,47,.3); border-radius: var(--radius-md);
-  padding: .75rem 1rem;
+  padding: .5rem .75rem;
   box-shadow: 0 8px 32px rgba(0,0,0,.5);
   white-space: nowrap;
+  max-width: 220px;
 }
-.pwa-banner > span { font-size: var(--tx-sm); color: var(--mut); }
 .pwa-install-btn {
   padding: .4rem 1rem; border-radius: 18px;
   background: var(--acc); border: none; color: #fff;

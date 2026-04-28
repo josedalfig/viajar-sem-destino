@@ -124,14 +124,17 @@ const Search = (() => {
     const soIda      = AppState.get('onewayOnly');
     const ida        = AppState.get('idaDate');
     const volta      = AppState.get('voltaDate');
-    const fmtD = d => d ? d.toLocaleDateString('pt-BR', { day:'2-digit', month:'long' }) : '';
+    const lang       = I18n.getLang();
+    const locale     = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es-ES' : 'en-US';
+    const fmtD = d => d ? d.toLocaleDateString(locale, { day:'2-digit', month:'long' }) : '';
+    const travelerLabel = passengers > 1 ? I18n.t('meta.travelerspl') : I18n.t('meta.travelers');
 
     document.getElementById('numR').textContent = results.length;
     document.getElementById('rMeta').textContent =
       orig + ' · ' + fmtD(ida) +
-      (!soIda && volta ? ' → ' + fmtD(volta) : ' · somente ida') +
-      ' · ' + passengers + ' viajante' + (passengers > 1 ? 's' : '') +
-      ' · até ' + Currency.format(budget);
+      (!soIda && volta ? ' → ' + fmtD(volta) : ' · ' + I18n.t('meta.oneway')) +
+      ' · ' + passengers + ' ' + travelerLabel +
+      ' · ' + I18n.t('meta.until') + ' ' + Currency.format(budget);
   }
 
   return { run, setSort, clearFilters, updateMeta };
