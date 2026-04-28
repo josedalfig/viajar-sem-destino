@@ -4,24 +4,26 @@
 /* ── Top bar ── */
 .r-topbar { margin-bottom: 1.25rem; }
 
-/* Head row: title left, nova-busca right */
+/* Head: title+meta centered, nova-busca absolute top-right */
 .r-topbar-head {
-  display: flex; align-items: flex-start;
-  justify-content: space-between; gap: .75rem;
+  position: relative;
+  text-align: center;
   margin-bottom: .75rem;
+  padding-right: 0;
 }
-.r-head { text-align: left; }
+.r-head { text-align: center; }
 .r-title { font-family: 'Playfair Display', serif; font-size: var(--tx-xl); font-weight: 700; }
 .r-title span { color: var(--accl); }
 .r-meta { font-size: var(--tx-xs); color: var(--mut); margin-top: .2rem; line-height: 1.5; }
 
 .btn-nova-busca {
-  padding: .375rem .875rem;
+  position: absolute; top: 0; right: 0;
+  padding: .3rem .75rem;
   border: 1px solid rgba(255,255,255,.12); border-radius: 18px;
   background: transparent; color: var(--mut);
   font-family: 'DM Sans', sans-serif; font-size: var(--tx-xs);
-  cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  min-height: 30px; transition: all var(--dur) var(--ease);
+  cursor: pointer; white-space: nowrap;
+  transition: all var(--dur) var(--ease);
 }
 .btn-nova-busca:hover { color: var(--sand); border-color: rgba(255,255,255,.25); }
 
@@ -58,29 +60,35 @@
 /* ── Filter bar — 2 row grid: [clima | cia] / [tipo] ── */
 .fbar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .625rem .875rem;
-  padding: .875rem 1rem;
+  grid-template-columns: 1fr auto 1fr;  /* clima | divider | cia */
+  grid-template-rows: auto auto;
+  gap: .5rem .75rem;
+  padding: .75rem 1rem;
   background: rgba(255,255,255,.03);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: var(--radius-md);
   margin-bottom: 1rem;
+  align-items: start;
 }
-.fbar-group  { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.fbar-group  { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
 .fbar-tipo   { grid-column: 1 / -1; }
 .fbar-clear  { grid-column: 1 / -1; justify-self: end; margin: 0;
-  padding: .3rem .75rem; border-radius: 18px; font-size: var(--tx-xs);
+  padding: .25rem .625rem; border-radius: 18px; font-size: var(--tx-xs);
   cursor: pointer; border: 1px solid rgba(255,255,255,.09);
   background: transparent; color: var(--mut);
-  font-family: 'DM Sans', sans-serif; height: 28px;
+  font-family: 'DM Sans', sans-serif; height: 26px;
   transition: all var(--dur) var(--ease); white-space: nowrap;
 }
 .fbar-clear:hover { border-color: var(--acc); color: var(--sand); }
 .fbar-label  {
-  font-size: var(--tx-xs); letter-spacing: .14em;
+  font-size: var(--tx-xs); letter-spacing: .12em;
   text-transform: uppercase; color: var(--mut); font-weight: 500;
 }
-.fbar-sep    { display: none; }
+.fbar-sep    {
+  width: 1px; background: rgba(255,255,255,.1);
+  align-self: stretch; margin: 0 .25rem;
+  grid-row: 1;
+}
 .fbar-cia    { min-width: 0; }
 
 /* Notice — hidden now, kept for potential future use */
@@ -149,10 +157,11 @@
   margin-bottom: 1.125rem;
   animation: fadeUp .3s var(--ease) both;
 }
-.dp-head     { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .625rem; }
-.dp-city-row { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.dp-head     { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .625rem; gap: .5rem; }
+.dp-city-row { display: flex; align-items: baseline; gap: .4rem; flex-wrap: wrap; }
 .dp-city     { font-family: 'Playfair Display', serif; font-size: var(--tx-xl); font-weight: 700; line-height:1.1; }
 .dp-ctry     { font-size: var(--tx-xs); color: var(--mut); opacity: .8; }
+.dp-rating   { font-size: var(--tx-xs); color: var(--mut); opacity: .8; }
 .xbtn {
   background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09);
   border-radius: var(--radius-sm);
@@ -264,10 +273,11 @@
   .dgrid          { grid-template-columns: 1fr; }
   .dp-stats       { grid-template-columns: 1fr 1fr; }
   .dp-cta         { flex-direction: column; }
-  .r-topbar-head  { flex-direction: column; gap: .5rem; }
+  .r-topbar-head  { padding-right: 0; min-height: 3rem; }
   .r-controls     { flex-wrap: wrap; }
   .r-ctrl-divider { display: none; }
   .fbar           { grid-template-columns: 1fr; }
+  .fbar-sep       { display: none; }
   .fbar-tipo      { grid-column: 1; }
   .fbar           { flex-direction: column; gap: .75rem; }
   .fbar-sep       { width: 100%; height: 1px; margin: 0; }

@@ -54,7 +54,7 @@ const DESTS = {
       desc: 'Cataratas do Iguaçu — uma das 7 maravilhas naturais do mundo.',
       rating: 4.9,
       times: ['07:20→09:00','16:30→18:10'],
-      img: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1591451719957-3f1d36f9b8b2?w=800&q=70',
     },
     {
       city: 'Salvador', country: '🇧🇷 Brasil', iata: 'SSA',
@@ -64,7 +64,7 @@ const DESTS = {
       desc: 'Pelourinho tombado pela UNESCO, axé e a culinária baiana mais autêntica.',
       rating: 4.8,
       times: ['06:30→09:00','18:20→20:50'],
-      img: 'https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?w=800&q=70',
+      img: 'https://images.unsplash.com/photo-1590577976322-3d2d6a2130f7?w=800&q=70',
     },
     {
       city: 'Recife', country: '🇧🇷 Brasil', iata: 'REC',

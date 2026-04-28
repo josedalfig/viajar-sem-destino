@@ -82,7 +82,7 @@ const Weather = (() => {
         + '<div class="wx-icon">' + wx.current.icon + '</div>'
         + '<span class="wx-label">Agora&nbsp;</span>'
         + '<span class="wx-temp">' + wx.current.temp + '°C</span>'
-        + '<span class="wx-desc">' + wx.current.desc + ' · ' + wx.current.humidity + '%</span>'
+        + '<span class="wx-desc">' + wx.current.desc + ' · ' + wx.current.humidity + '% umidade</span>'
       + '</div>'
       + (wx.forecast
         ? '<div class="wx-card">'
